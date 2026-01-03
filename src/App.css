@@ -1,0 +1,1837 @@
+:root {
+  --pink: #ed5eaf;
+  --blue: #d6edff;
+  --grey: #d9d9d9;
+  --white: #ffffff;
+  --black: #292929;
+  --pinkContrast: #d31782;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  background: var(--grey);
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* Correction CLS : On définit une base propre pour les images */
+.accueil-lcp-image,
+.header img,
+img {
+  width: 100%;
+  height: auto; /* Changé de 100% à auto pour respecter l'aspect-ratio */
+}
+
+.adressesEtTelBloc a,
+.bouttonDecouvrir a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bouttonDecouvrir a,
+.bouttonDecouvrir button {
+  padding: 20px 60px;
+  background-color: var(--pink);
+}
+
+.adressesEtTelBloc a,
+.bouttonDecouvrir a,
+.bouttonRetour a,
+.copyrightFooter a,
+.elementListe1 a,
+.footerListe a,
+.logoReseaux a,
+.telephoneInfos a,
+.texteCatégoriesMentions a {
+  text-decoration: none;
+}
+
+#password-input,
+.formulaire input,
+.modal-content .close,
+.tableauHoraires pre,
+textarea {
+  font-family: Roboto, sans-serif;
+}
+
+#bouttonVisibilite.activeButton:hover,
+#bouttonVisibilite:hover {
+  color: var(--grey);
+  scale: 0.9;
+}
+
+.accueil-lcp-image,
+.image,
+.imagesHorizontalContainer img,
+.imagesVerticales img {
+  object-fit: cover;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.loading {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading.hidden {
+  opacity: 0;
+}
+
+.accueil-lcp-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header,
+.loader {
+  position: fixed;
+}
+
+.image-description {
+  background-color: var(--pink);
+  margin-top: -5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-bottom: 25px;
+}
+
+.choisirOptiqueChatenaySection,
+.contactezNousSection {
+  margin-top: 20px;
+  background-color: var(--white);
+}
+
+.sectionCarouselMarques {
+  background-color: var(--white);
+}
+
+.contactezNousSection {
+  display: flex;
+  padding: 30px;
+  min-height: 650px;
+  contain: layout;
+}
+
+.PositionBlocHoraire,
+.accueilBlocText {
+  background-color: rgba(48, 48, 48, 0.7);
+  display: flex;
+}
+
+.header {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.accueil {
+  height: 100%;
+  display: flex;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo img {
+  transform: scale(0.6);
+}
+
+.logo img:hover {
+  transition: 0.1s;
+  transform: scale(0.79);
+}
+
+.blocText,
+.imagesContainerChoisir,
+.logoReseaux,
+.titreChoisirOptique,
+.titreEtTexteetBoutton {
+  display: flex;
+}
+
+.accueilBlocText {
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  color: var(--white);
+  justify-content: center;
+  height: 100vh;
+  width: 35vw;
+  text-align: left;
+}
+
+.rondRose,
+.rondRose2 {
+  width: 100px;
+  height: 100px;
+}
+
+.accueilBlocText h1 {
+  line-height: 89.5px;
+  font-size: 6rem;
+  font-weight: 500;
+  margin-bottom: 10%;
+}
+
+.adressesEtTelBloc a:hover {
+  transition: 0.5s;
+  transform: scale(1.05);
+}
+
+.adressesEtTelBloc {
+  font-size: 1.5rem;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.adresseEtTel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.adressesEtTelBloc span {
+  scale: 1.5;
+}
+
+.telephones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paragrapheAccueil {
+  margin-top: 50px;
+  line-height: 35px;
+  font-size: 20px;
+}
+
+.bouttonDecouvrir {
+  margin-top: 60px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black);
+  font-size: 22px;
+}
+
+.bouttonDecouvrir a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  min-width: 48px;
+  border-radius: 10px;
+  border: none;
+}
+
+.bouttonDecouvrir button {
+  color: var(--black);
+  font-size: 22px;
+  display: flex;
+  border: none;
+  border-radius: 10px;
+}
+
+.PositionBlocHoraire,
+.PositionBlocHoraire2 {
+  position: absolute;
+  border-radius: 15px;
+  color: #bdf2ab;
+  line-height: 40px;
+}
+
+.bouttonDecouvrir button:hover,
+.bouttonHoraires:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  transition: 0.25s;
+}
+
+.PositionBlocHoraire {
+  right: 100px;
+  bottom: 100px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-shadow: var(--black) 3px 3px 3px;
+  min-height: 90px;
+  min-width: 250px;
+}
+
+.PositionBlocHoraire2 {
+  display: none;
+  min-height: 90px;
+}
+
+.blocTextHeures {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.blocHorairesTexte,
+.bouttonHoraires {
+  justify-content: center;
+  display: flex;
+}
+
+.bouttonHoraires {
+  margin-top: 15px;
+  align-items: center;
+  font-size: 19px;
+  background-color: var(--pink);
+  color: var(--black);
+  border: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+  min-height: 48px;
+  min-width: 160px;
+}
+
+.rondRose,
+.rondRose2,
+.rondRose3 {
+  background: var(--pink);
+  border-radius: 50%;
+  position: relative;
+}
+
+.blocHorairesTexte {
+  align-items: center;
+  flex-direction: column;
+}
+
+.h2CarouselMarques {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black);
+}
+
+.headerCarouselMarques {
+  padding: 30px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rondRose {
+  float: left;
+}
+
+.rondRose2 {
+  float: right;
+}
+
+.rondRose3 {
+  float: left;
+  width: 130px;
+  height: 130px;
+}
+
+#labelMdp,
+.carouselMarqueContainer,
+.indicators {
+  display: flex;
+  justify-content: center;
+}
+
+.carouselMarqueContainer img {
+  height: 100px;
+  display: flex;
+}
+
+.nosMarquesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.carouselMarques {
+  overflow: hidden;
+  width: 1000px;
+}
+
+.innerMarques {
+  white-space: nowrap;
+  transition: transform 0.3s;
+}
+
+.carouselMarques-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--white);
+}
+
+.carouselMarques-item img,
+.choisirOptiqueChatenaySection,
+.docteur,
+.galleriePhotoContainer,
+.image-grid,
+.modal,
+.paragraphe1,
+.paragrapheTextChoisir,
+.services {
+  display: flex;
+}
+
+.carouselMarques-item img {
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100% !important;
+  margin-left: 50px;
+}
+
+.carouselMarques-item img:hover {
+  scale: 0.9;
+  opacity: 0.8;
+  transition: 0.25s;
+  z-index: 999;
+}
+
+.indicators > button {
+  width: 20px;
+  margin: 5px;
+  border: none;
+  background: 0 0;
+  cursor: pointer;
+}
+
+.indicators > button:hover {
+  scale: 1.1;
+  opacity: 0.8;
+}
+
+.choisirOptiqueContainer {
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 75px;
+  display: flex;
+}
+
+.choisirOptiqueh2 {
+  color: var(--black);
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.paragrapheTextChoisir {
+  margin-top: 50px;
+  flex-direction: column;
+  display: flex;
+}
+
+.paragrapheTextChoisir span {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
+
+.paragraphe1 {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.rose {
+  color: var(--pink);
+  margin-left: 15px;
+  font-size: 25px;
+}
+
+.liste,
+.liste li {
+  color: var(--black);
+}
+
+.liste {
+  margin-left: 125px;
+  line-height: 25px;
+}
+
+.liste li {
+  font-weight: 400;
+}
+
+.docteur,
+.services {
+  justify-content: center;
+  align-items: center;
+  background-color: var(--pink);
+  padding: 15px;
+  border-radius: 100%;
+  font-size: 15px;
+  color: var(--white);
+}
+
+.glasses {
+  background-color: var(--blue);
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--pink);
+}
+
+.galleriePhotoContainer {
+  padding: 30px 50px;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  height: auto;
+  position: relative;
+  display: flex;
+}
+
+.image-grid {
+  flex-wrap: wrap;
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.image-container {
+  width: calc(33.33% - 10px);
+  margin: 5px;
+  position: relative;
+}
+
+.image:hover {
+  opacity: 0.9;
+}
+
+.page:hover,
+.selected-page:hover,
+.telephoneInfos a:hover {
+  opacity: 0.8;
+}
+
+.image {
+  height: 25vh;
+  cursor: pointer;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+/* Correction CLS : Fixer la hauteur du bloc d'horaires */
+.blocHoraires {
+  padding: 25px;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tableauHoraires {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.bouttonMenuHoraires {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal-nav-button {
+  margin: 15px;
+  background-color: var(--pink);
+  border: none;
+  padding: 15px;
+  border-radius: 25px;
+  font-weight: 1000;
+}
+
+.modal-content .close {
+  background-color: var(--pink);
+  border-radius: 25px;
+  padding: 5px;
+  right: 5px;
+  top: 5px;
+}
+
+.bouttonValider:hover,
+.modal-nav-button:hover,
+.pagination button:hover {
+  cursor: pointer;
+  background-color: var(--blue);
+}
+
+.modal-image {
+  object-fit: contain;
+  margin-top: 10px;
+  width: 100%;
+  max-height: 70vh;
+  margin-bottom: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.page,
+.selected-page {
+  margin-right: 5px;
+  padding: 15px 10px;
+  border-radius: 25px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.headerFooterH5,
+.imageHeaderFooter {
+  margin-right: 50px;
+}
+
+.selected-page {
+  background-color: var(--pink);
+}
+
+.imageNormContainer,
+.imagesLargeContainer {
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 25px;
+  display: flex;
+  position: relative;
+  box-shadow: 0 4px 27px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (max-width: 880px) {
+  .carouselMarques {
+    width: 300px;
+  }
+}
+
+.imagesLargeContainer {
+  right: -150px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.imageNormContainer {
+  margin-top: -175px;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  left: 32px;
+}
+
+.voirConditions {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rondRoseContainer {
+  position: relative;
+  top: 300px;
+  right: 180px;
+}
+
+.imagesGalleriesContainer img,
+.zoomed,
+.zoomed2 {
+  border-radius: 25px;
+}
+
+.nousTrouverContainer {
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.titreNousTrouverh2 {
+  color: var(--black);
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.texte {
+  margin-bottom: 50px;
+}
+
+.headerFooter,
+.tableauHoraires h2 {
+  margin-bottom: 25px;
+}
+
+.textP {
+  color: var(--black);
+  font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  word-break: keep-all;
+  word-spacing: 100%;
+  line-height: normal;
+  width: 100%;
+}
+
+.bouttonRose {
+  margin-top: 50px;
+  padding: 20px 300px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: var(--pink);
+  color: var(--black);
+}
+
+.bouttonMenuHoraires:hover,
+.bouttonRose:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.tableauHoraires {
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 25px;
+  border: none;
+}
+
+.textHorairesPopup {
+  align-items: flex-start;
+}
+
+.tableauHoraires button {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouttonMenuHoraires {
+  font-size: 18px;
+  background-color: var(--pink);
+  color: var(--black);
+  width: 30%;
+  padding: 10px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+}
+
+.mapLocation {
+  display: flex;
+  padding: 50px;
+  background: linear-gradient(90deg, var(--white) 50%, var(--pink) 50%);
+  border-radius: 0 25px 25px 0;
+  flex: 1;
+}
+
+.mapLocation iframe {
+  background-color: transparent;
+  border: none;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+}
+
+.tableauHoraires li {
+  list-style: none;
+}
+
+.formulaire {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -50px;
+}
+
+.formulaire input,
+textarea {
+  padding: 15px;
+  font-size: 25px;
+  margin-top: 50px;
+  border: none;
+  border-bottom: 1px solid;
+  border-bottom-color: var(--black);
+  width: 100%;
+  height: 25px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  font-family: Roboto, sans-serif;
+}
+
+.infosContact {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+}
+
+.telephoneInfos {
+  margin-top: 25px;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.telephoneInfos a {
+  color: var(--pinkContrast);
+}
+
+.blockMotDePasseContainer,
+.bouttonRetour a,
+.copyrightFooter,
+.copyrightFooter a,
+.elementListe1 a,
+.footerListe a,
+.headerFooterH5,
+.logoReseaux a,
+.texteCatégoriesMentions a,
+.texteCatégoriesMentions p,
+.titreCatégoriesMentions,
+.titreGalleriePhotos,
+.titreMention {
+  color: var(--black);
+}
+
+.mapContainer {
+  flex: 1;
+  border-radius: 25px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.27);
+  width: 100%;
+}
+
+.titreEtBouttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 900px;
+  height: 100%;
+  width: 50%;
+}
+
+.infosContact span {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  scale: 1.1;
+}
+
+.interieurInfosContact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footerSection {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  width: 100%;
+  background-color: var(--white);
+  /* min-height: 450px; */
+  /* contain: layout; */
+}
+
+.sectionGalleriePhotos {
+  flex-direction: column;
+  background-color: var(--white);
+  display: flex;
+}
+
+.footerListe,
+.headerFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.footerSection img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: flex;
+}
+
+.headerFooter {
+  margin-top: 50px;
+  align-items: center;
+  gap: 20
+}
+
+.imageHeaderFooter a:hover,
+.imageHeaderFooter img:hover {
+  transition: 0.25s;
+}
+
+.headerFooterH5 {
+  border-right: 1px solid;
+  padding-right: 50px;
+  font-size: 25px;
+  color: var(--black);
+}
+
+.bouttonRetour3 a:hover,
+.copyrightFooter a:hover,
+.footerListe a:hover,
+.logoReseaux a:hover {
+  color: var(--pink);
+  transition: 0.25s;
+}
+
+.footerListe {
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.footerListe li {
+  display: inline;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.footerDescription {
+  margin-bottom: 25px;
+  max-width: 900px;
+  min-height: 100px;
+}
+
+.footerDescription p {
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 25px;
+}
+
+.copyrightFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  color: var(--black);
+  min-height: 24px;
+}
+
+.elementListe1,
+.elementListe2,
+.elementListe5 {
+  padding-right: 25px;
+  padding-left: 25px;
+  border-right: 1px solid;
+}
+
+.elementListe4 {
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.bouttonRetour {
+  padding: 25px;
+  background-color: var(--white);
+  height: 25px;
+}
+
+.bouttonRetour a {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+}
+
+.bouttonRetour a:hover {
+  color: var(--pink);
+  transition: 0.25s;
+  margin-left: 5px;
+}
+
+.MentionsLegalesTexte {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.titreCatégoriesMentions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: var(--black);
+}
+
+.titreMention {
+  font-size: 25px;
+  color: var(--black);
+}
+
+.titreCatégoriesMentions h2 {
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.texteCatégoriesMentions p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 20px;
+  color: var(--black);
+}
+
+.titreEtTexteMentions {
+  border-bottom: 1px solid;
+}
+
+.titreGalleriePhotosPage {
+  background-color: var(--white);
+  padding: 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.sectionGalleriePhotos {
+  height: fit-content;
+  margin-top: 25px;
+}
+
+.titreGalleriePhotos {
+  margin-top: 25px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--black);
+}
+
+.titreGalleriePhotos h2 {
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.buttonUploadPhoto {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.adminBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.blockMotDePasseContainer {
+  font-size: large;
+  padding: 150px;
+  border-radius: 25px;
+  background-color: var(--white);
+  max-width: 800px;
+  max-height: 440px;
+  overflow: scroll;
+  min-width: 800px;
+  min-height: 440px;
+  color: var(--black);
+}
+
+.bouttonValider,
+.pagination button {
+  background-color: var(--pink);
+  padding: 10px;
+  min-height: 48px;
+}
+
+#password-input {
+  height: 25px;
+  width: 250px;
+  border-radius: 25px;
+  border: 1px solid var(--black);
+  padding: 10px;
+  color: var(--pink);
+  font-weight: 700;
+  display: flex;
+}
+
+.bouttonValider {
+  border-radius: 25px;
+  border-width: 0;
+  width: 100px;
+}
+
+#bouttonVisibilite {
+  background-color: transparent;
+  border: none;
+  color: var(--pink);
+}
+
+#bouttonVisibilite:hover {
+  cursor: pointer;
+}
+
+#bouttonVisibilite.activeButton {
+  color: var(--blue);
+}
+
+#boutton .bouttonValider:hover {
+  background-color: var(--blue);
+  color: var(--pink);
+  cursor: pointer;
+}
+
+.uploaded-images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  border: none;
+  border-radius: 30px;
+}
+
+.uploaded-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.uploaded-image {
+  margin: 10px;
+}
+
+.uploaded-image img {
+  max-width: 100%;
+  max-height: 150px;
+}
+
+.containeruploadFichier {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containeruploadFichier img {
+  max-width: 300px;
+  min-width: 300px;
+}
+
+.motDePasseForm {
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.blockMotDePasseContainer h5 {
+  padding: 25px;
+  border: 3px solid #292929;
+  border-radius: 25px;
+}
+
+.bouttonRetour2 a,
+.bouttonRetour3 a {
+  padding: 5px;
+  text-decoration: none;
+  display: flex;
+}
+
+.cancelButton {
+  padding: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.bouttonRetour2 a {
+  border-radius: 25px 0 0 25px;
+  background-color: var(--white);
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  transition: 0.25s;
+}
+
+.bouttonRetour2:hover,
+.bouttonRetour3 a {
+  color: var(--black);
+}
+
+.bouttonRetour2 a:hover {
+  color: var(--pink);
+  background-color: var(--blue);
+  transition: 0.25s;
+}
+
+.bouttonRetour3 {
+  background-color: var(--grey);
+  z-index: 999;
+  position: fixed;
+  display: flex;
+}
+
+.bouttonRetour3 a {
+  justify-content: center;
+  align-items: center;
+}
+
+.gallerieDimageInterieur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 75px;
+}
+
+.gallerieDimageInterieur h1,
+.troisiemeImageGallerie {
+  display: none;
+}
+
+.gallerieDimageInterieur img {
+  box-shadow: 0 4px 27px 4px rgba(0, 0, 0, 0.25);
+}
+
+.premiereImageGallerie {
+  margin-bottom: 70px;
+}
+
+.imagesGalleriesContainer {
+  display: flex;
+  align-items: center;
+}
+
+.imagesHorizontalContainer {
+  margin-right: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagesVerticales {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.erreur404,
+.pageNotFoundContainer {
+  justify-content: center;
+  display: flex;
+}
+
+.imagesVerticales img {
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 9/16;
+}
+.imagesHorizontalContainer img {
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+}
+.imagesGalleriesContainer a:hover {
+  opacity: 0.9;
+  transition: 0.2s;
+}
+
+.pageNotFoundContainer {
+  align-items: center;
+  height: 60vh;
+}
+
+.erreur404 {
+  line-height: 3;
+  align-items: center;
+  flex-direction: column;
+}
+
+.erreur404 span {
+  scale: 2;
+}
+
+.loadingScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loaderDeux {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid var(--pink);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: 1s linear infinite spin;
+}
+
+.image-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.image-buttons button {
+  cursor: pointer;
+  background-color: var(--pink);
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.image-buttons button:hover {
+  opacity: 0.9;
+  transition: 0.5s;
+  background-color: var(--blue);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #contact,
+  .PositionBlocHoraire,
+  .bouttonDecouvrir,
+  .header,
+  .imagesContainerChoisir,
+  .imagesVerticales,
+  .mapLocation,
+  .sectionCarouselMarques {
+    display: none;
+  }
+  .gallerieDimageInterieur {
+    padding: 50px;
+  }
+  .gallerieDimageInterieur h1 {
+    display: flex;
+    margin-bottom: 25px;
+  }
+  .imagesHorizontalContainer {
+    margin-right: 0;
+  }
+  .imagesHorizontalContainer img {
+    min-width: 300px;
+  }
+  .premiereImageGallerie {
+    margin-bottom: 25px;
+  }
+  .PositionBlocHoraire2,
+  .troisiemeImageGallerie {
+    margin-top: 25px;
+    display: flex;
+  }
+  .accueil {
+    background-position: 60%;
+    background-size: cover;
+  }
+  .adressesEtTelBloc {
+    align-items: center;
+  }
+  .accueilBlocText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100%;
+    padding: 50px;
+  }
+  .titreEtTextetBoutton,
+  footer,
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .PositionBlocHoraire2 {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    color: #bdf2ab;
+    line-height: 40px;
+    width: 70%;
+    display: flex;
+  }
+  .carouselMarques {
+    width: 500px;
+  }
+  .footerDescription,
+  .textP {
+    width: 75%;
+  }
+  .nousTrouverContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .titreEtBouttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .footerListe ul {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-end;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .accueil {
+    background-position: 50%;
+  }
+  .accueilBlocText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+  .titreEtTextetBoutton,
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .PositionBlocHoraire2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    color: #bdf2ab;
+    line-height: 40px;
+    width: 70%;
+    margin-top: 25px;
+  }
+  .gallerieDimageInterieur,
+  .image-gallery {
+    padding: 50px;
+  }
+  .gallerieDimageInterieur h1 {
+    display: flex;
+    margin-bottom: 25px;
+  }
+  .imagesHorizontalContainer {
+    margin-right: 0;
+  }
+  .imagesHorizontalContainer img {
+    min-width: 300px;
+  }
+  .premiereImageGallerie {
+    margin-bottom: 25px;
+  }
+  .troisiemeImageGallerie {
+    display: flex;
+    margin-top: 25px;
+  }
+  .PositionBlocHoraire,
+  .bouttonDecouvrir,
+  .imagesContainerChoisir,
+  .imagesVerticales,
+  .rondRoseContainer {
+    display: none;
+  }
+  .choisirOptiqueContainer {
+    width: 70%;
+    padding-left: 10%;
+  }
+  .PositionBlocHoraire2 {
+    display: flex;
+  }
+  .carouselMarques {
+    width: 500px;
+  }
+  .titreEtBouttons {
+    align-items: center;
+    width: auto;
+  }
+  .textP {
+    align-items: center;
+  }
+  .footerDescription {
+    width: 75%;
+  }
+  .nousTrouverContainer {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+  .mapLocation {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .accueil {
+    background-position: 50%;
+  }
+  .accueilBlocText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+    padding-bottom: 25px;
+  }
+  .titreEtTextetBoutton,
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .PositionBlocHoraire,
+  .bouttonDecouvrir,
+  .imagesContainerChoisir,
+  .imagesVerticales,
+  .rondRoseContainer {
+    display: none;
+  }
+  .PositionBlocHoraire2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    color: #bdf2ab;
+    line-height: 40px;
+    width: 70%;
+    margin-top: 25px;
+  }
+  .h2CarouselMarques {
+    text-align: center;
+  }
+  .carouselMarques {
+    width: 500px;
+  }
+  .sectionGalleriePhotos {
+    align-items: center;
+  }
+  .choisirOptiqueContainer {
+    width: 70%;
+    padding-left: 10%;
+  }
+  .gallerieDimageInterieur,
+  .image-gallery {
+    padding: 50px;
+  }
+  .gallerieDimageInterieur h1 {
+    display: flex;
+    margin-bottom: 25px;
+  }
+  .imagesHorizontalContainer {
+    margin-right: 0;
+  }
+  .imagesHorizontalContainer img {
+    min-width: 300px;
+  }
+  .premiereImageGallerie {
+    margin-bottom: 25px;
+  }
+  .troisiemeImageGallerie {
+    display: flex;
+    margin-top: 25px;
+  }
+  .nousTrouverContainer {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  .formulaire input,
+  textarea {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+  }
+  .titreEtBouttons {
+    width: auto;
+  }
+  .mapLocation {
+    width: 100%;
+    min-height: 10%;
+    margin-top: 100px;
+  }
+  .footerDescription,
+  .textP {
+    width: 75%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  .header img {
+    height: 75%;
+  }
+  .accueil {
+    background-position: 100%;
+  }
+  .accueilBlocText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    max-width: 100%;
+  }
+  .PositionBlocHoraire,
+  .bouttonDecouvrir,
+  .imagesContainerChoisir,
+  .imagesVerticales,
+  .rondRoseContainer {
+    display: none;
+  }
+  .formulaire input,
+  .h2CarouselMarques,
+  textarea {
+    text-align: center;
+  }
+  .carouselMarques {
+    width: 500px;
+  }
+  .PositionBlocHoraire2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    color: #bdf2ab;
+    line-height: 40px;
+    width: 70%;
+    margin-top: 25px;
+  }
+  .titreEtTextetBoutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    scale: 0.8;
+  }
+  .titreEtBouttons {
+    width: 75%;
+    align-items: center;
+  }
+  .gallerieDimageInterieur,
+  .image-gallery {
+    padding: 50px;
+  }
+  .gallerieDimageInterieur h1 {
+    display: flex;
+    margin-bottom: 25px;
+  }
+  .imagesHorizontalContainer {
+    margin-right: 0;
+  }
+  .imagesHorizontalContainer img {
+    min-width: 300px;
+  }
+  .premiereImageGallerie {
+    margin-bottom: 25px;
+  }
+  .troisiemeImageGallerie {
+    display: flex;
+    margin-top: 25px;
+  }
+  .choisirOptiqueContainer {
+    padding-left: 10%;
+  }
+  .titreGalleriePhotos {
+    margin-bottom: 50px;
+  }
+  .nousTrouverContainer {
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 0;
+  }
+  .mapLocation {
+    width: 80%;
+    margin-top: 25px;
+    min-height: 20%;
+  }
+  .texteCatégoriesMentions {
+    width: 70%;
+  }
+  .sectionGalleriePhotos {
+    justify-content: center;
+    align-items: center;
+  }
+  .mapContainer {
+    flex: 1;
+  }
+}
+
+.logoReseaux a,
+.page,
+.selected-page {
+  min-width: 48px;
+}
+
+.bouttonDecouvrir button,
+.bouttonHoraires,
+.bouttonMenuHoraires,
+.bouttonRose,
+.bouttonValider,
+.logoReseaux a,
+.modal-nav-button,
+.page,
+.selected-page {
+  min-height: 48px;
+}
+
+@media screen and (min-width: 1920px) {
+  .accueil {
+    background-size: 100%;
+  }
+}
+
+.logoReseaux a {
+  padding: 12px;
+  display: inline-block;
+  margin: 4px;
+}
+
+.footerListe a {
+  padding: 12px 10px;
+  display: inline-block;
+}
+
+.adresseEtTel {
+  margin-right: 8px;
+}
+
+.adressesEtTelBloc span {
+  margin-right: 15px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 10px;
+}

@@ -1,0 +1,44 @@
+{
+  "name": "optiquechatenayfinal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "yarn@4.12.0",
+  "dependencies": {
+    "firebase": "^12.7.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.11.0",
+    "react-swipeable": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "rimraf": "^6.1.2",
+    "shx": "^0.3.4",
+    "sitemap-generator": "^8.5.1",
+    "typescript": "5.9.3",
+    "vite": "^6.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node ./scripts/generate-sitemap.js || echo 'Sitemap skipped'",
+    "build": "tsc && vite build && node -e \"const fs = require('fs'); if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié dans dist'); }\"",
+    "preview": "vite preview",
+    "clean": "rimraf node_modules dist .yarn/cache && yarn cache clean --all"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

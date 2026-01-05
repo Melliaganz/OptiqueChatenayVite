@@ -25,12 +25,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Correction CLS : On définit une base propre pour les images */
 .accueil-lcp-image,
 .header img,
 img {
   width: 100%;
-  height: auto; /* Changé de 100% à auto pour respecter l'aspect-ratio */
+  height: auto;
+  /* Ajout pour respecter le maxWidth défini dans le JS */
+  max-width: inherit; 
 }
 
 .adressesEtTelBloc a,
@@ -39,10 +40,21 @@ img {
   text-decoration: none;
 }
 
+.innerMarques {
+  display: flex;
+  transition: transform 0.3s ease-out;
+  transform: translateX(calc(var(--active-index) * -100%));
+}
+
 .bouttonDecouvrir a,
 .bouttonDecouvrir button {
   padding: 20px 60px;
   background-color: var(--pink);
+}
+
+.indicators > button.active {
+  background-color: var(--pink);
+  opacity: 1;
 }
 
 .adressesEtTelBloc a,
@@ -57,6 +69,25 @@ img {
   text-decoration: none;
 }
 
+.innerMarques[data-active-index="0"] {
+  transform: translateX(0%);
+}
+.innerMarques[data-active-index="1"] {
+  transform: translateX(-100%);
+}
+.innerMarques[data-active-index="2"] {
+  transform: translateX(-200%);
+}
+.innerMarques[data-active-index="3"] {
+  transform: translateX(-300%);
+}
+.innerMarques[data-active-index="4"] {
+  transform: translateX(-400%);
+}
+.innerMarques[data-active-index="5"] {
+  transform: translateX(-500%);
+}
+
 #password-input,
 .formulaire input,
 .modal-content .close,
@@ -68,7 +99,6 @@ textarea {
 #bouttonVisibilite.activeButton:hover,
 #bouttonVisibilite:hover {
   color: var(--grey);
-  scale: 0.9;
 }
 
 .accueil-lcp-image,
@@ -95,9 +125,33 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  aspect-ratio: 1400 / 800;
+  object-fit: cover;
+}
+.mainContenu {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
+.suspense-loader {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  z-index: 9999;
+}
 .header,
 .loader {
   position: fixed;
@@ -133,7 +187,6 @@ html {
   contain: layout;
 }
 
-.PositionBlocHoraire,
 .accueilBlocText {
   background-color: rgba(48, 48, 48, 0.7);
   display: flex;
@@ -148,10 +201,10 @@ html {
 }
 
 .accueil {
-  height: 100%;
+  position: relative;
+  min-height: 100vh;
   display: flex;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  flex-direction: column;
 }
 
 .logo:hover {
@@ -184,6 +237,8 @@ html {
   height: 100vh;
   width: 35vw;
   text-align: left;
+  position: relative;
+  z-index: 2;
 }
 
 .rondRose,
@@ -217,10 +272,6 @@ html {
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
-}
-
-.adressesEtTelBloc span {
-  scale: 1.5;
 }
 
 .telephones {
@@ -288,6 +339,9 @@ html {
   box-shadow: var(--black) 3px 3px 3px;
   min-height: 90px;
   min-width: 250px;
+  background-color: rgba(41, 41, 41, 0.7);
+  z-index: 2;
+  display: flex;
 }
 
 .PositionBlocHoraire2 {
@@ -350,7 +404,35 @@ html {
   justify-content: space-between;
   align-items: center;
 }
+/* On s'assure que le parent est la référence de positionnement */
+.imagesCadreContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.rondRoseDynamique {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background-color: var(--pink);
+  border-radius: 50%;
+  top: 75%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.imagesLargeContainer {
+  z-index: 0;
+  position: relative;
+}
+
+.imageNormContainer {
+  z-index: 2;
+  position: relative;
+  margin-top: -110px;
+}
 .rondRose {
   float: left;
 }
@@ -425,7 +507,6 @@ html {
 }
 
 .carouselMarques-item img:hover {
-  scale: 0.9;
   opacity: 0.8;
   transition: 0.25s;
   z-index: 999;
@@ -437,10 +518,10 @@ html {
   border: none;
   background: 0 0;
   cursor: pointer;
+  color: var(--black);
 }
 
 .indicators > button:hover {
-  scale: 1.1;
   opacity: 0.8;
 }
 
@@ -563,7 +644,6 @@ html {
   margin-top: 20px;
 }
 
-/* Correction CLS : Fixer la hauteur du bloc d'horaires */
 .blocHoraires {
   padding: 25px;
   min-height: 112px;
@@ -701,7 +781,7 @@ html {
 }
 
 .imageNormContainer {
-  margin-top: -175px;
+  margin-top: -110px;
   align-items: center;
   justify-content: center;
   z-index: 2;
@@ -716,8 +796,8 @@ html {
 
 .rondRoseContainer {
   position: relative;
-  top: 300px;
-  right: 180px;
+  top: 163px;
+  right: 33px;
 }
 
 .imagesGalleriesContainer img,
@@ -826,6 +906,7 @@ html {
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
+  color: var(--black);
   border: 1px solid #ddd;
 }
 
@@ -849,7 +930,9 @@ textarea {
   border-bottom: 1px solid;
   border-bottom-color: var(--black);
   width: 100%;
-  height: 25px;
+  height: 3em;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 .input::placeholder,
@@ -912,13 +995,15 @@ textarea {
   margin-left: 10px;
   display: flex;
   justify-content: center;
-  scale: 1.1;
+  align-items: center;
+  color: var(--pinkContrast);
 }
 
 .interieurInfosContact {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: var(--black);
 }
 
 .footerSection {
@@ -930,8 +1015,6 @@ textarea {
   margin-top: 25px;
   width: 100%;
   background-color: var(--white);
-  /* min-height: 450px; */
-  /* contain: layout; */
 }
 
 .sectionGalleriePhotos {
@@ -944,6 +1027,7 @@ textarea {
 .headerFooter {
   display: flex;
   justify-content: center;
+  color: var(--black);
 }
 
 .footerSection img {
@@ -956,7 +1040,7 @@ textarea {
 .headerFooter {
   margin-top: 50px;
   align-items: center;
-  gap: 20
+  gap: 20px;
 }
 
 .imageHeaderFooter a:hover,
@@ -1003,6 +1087,7 @@ textarea {
   justify-content: center;
   align-items: center;
   line-height: 25px;
+  color: var(--black);
 }
 
 .copyrightFooter {
@@ -1344,12 +1429,12 @@ textarea {
 .imagesVerticales img {
   height: auto;
   max-width: 100%;
-  aspect-ratio: 9/16;
+  /* Suppression du ratio fixe qui écrasait le JS */
 }
 .imagesHorizontalContainer img {
   height: auto;
   max-width: 100%;
-  aspect-ratio: 16/9;
+  /* Suppression du ratio fixe qui écrasait le JS */
 }
 .imagesGalleriesContainer a:hover {
   opacity: 0.9;
@@ -1367,9 +1452,6 @@ textarea {
   flex-direction: column;
 }
 
-.erreur404 span {
-  scale: 2;
-}
 
 .loadingScreen {
   display: flex;
@@ -1438,7 +1520,8 @@ textarea {
     margin-right: 0;
   }
   .imagesHorizontalContainer img {
-    min-width: 300px;
+    /* Changement de min-width en max-width pour éviter les alertes Lighthouse */
+    max-width: 100%; 
   }
   .premiereImageGallerie {
     margin-bottom: 25px;
@@ -1545,7 +1628,7 @@ textarea {
     margin-right: 0;
   }
   .imagesHorizontalContainer img {
-    min-width: 300px;
+    max-width: 100%;
   }
   .premiereImageGallerie {
     margin-bottom: 25px;
@@ -1654,7 +1737,7 @@ textarea {
     margin-right: 0;
   }
   .imagesHorizontalContainer img {
-    min-width: 300px;
+    max-width: 100%;
   }
   .premiereImageGallerie {
     margin-bottom: 25px;
@@ -1735,7 +1818,6 @@ textarea {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    scale: 0.8;
   }
   .titreEtBouttons {
     width: 75%;
@@ -1753,7 +1835,7 @@ textarea {
     margin-right: 0;
   }
   .imagesHorizontalContainer img {
-    min-width: 300px;
+    max-width: 100%;
   }
   .premiereImageGallerie {
     margin-bottom: 25px;

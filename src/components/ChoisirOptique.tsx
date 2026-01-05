@@ -1,6 +1,9 @@
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { FaUserMd, FaGlasses } from "react-icons/fa";
-import { MdOutlineAccountBalanceWallet, MdOutlineVisibility } from "react-icons/md";
+import {
+  MdOutlineAccountBalanceWallet,
+  MdOutlineVisibility,
+} from "react-icons/md";
 
 interface Feature {
   icon: ReactElement;
@@ -31,7 +34,11 @@ const FEATURES: Feature[] = [
     icon: <MdOutlineVisibility />,
     cls: "services",
     title: "Nos services",
-    items: ["Examen de vue*", "Remise en état et nettoyage", "Ajustage de vos lunettes"],
+    items: [
+      "Examen de vue*",
+      "Remise en état et nettoyage",
+      "Ajustage de vos lunettes",
+    ],
   },
   {
     icon: <MdOutlineAccountBalanceWallet />,
@@ -62,12 +69,17 @@ const ChoisirOptique = () => {
               </div>
               <div className="liste">
                 <ul>
-                  {f.text ? <li>{f.text}</li> : f.items?.map((item, j) => <li key={j}>{item}</li>)}
+                  {f.text ? (
+                    <li>{f.text}</li>
+                  ) : (
+                    f.items?.map((item, j) => <li key={j}>{item}</li>)
+                  )}
                 </ul>
               </div>
             </div>
           ))}
         </div>
+
         <div className="imagesContainerChoisir">
           <div className="imagesCadreContainer">
             <div className="imagesLargeContainer">
@@ -76,19 +88,24 @@ const ChoisirOptique = () => {
                 alt="Intérieur magasin"
                 className="zoomed"
                 loading="lazy"
+                width="250px"
+                height="250px"
               />
             </div>
+
+            {/* Le rond rose est maintenant un enfant direct du cadre pour rester lié aux images */}
+            <div className="rondRoseDynamique"></div>
+
             <div className="imageNormContainer">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/ImagesHorizon%2Fimage_2026-01-04_000751218.webp?alt=media"
                 alt="Présentoir"
                 className="zoomed2"
                 loading="lazy"
+                width="250px"
+                height="250px"
               />
             </div>
-          </div>
-          <div className="rondRoseContainer">
-            <div className="rondRose3"></div>
           </div>
         </div>
       </div>

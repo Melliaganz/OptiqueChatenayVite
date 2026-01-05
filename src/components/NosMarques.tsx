@@ -144,29 +144,27 @@ const MARQUES_DATA: Marque[][] = [
 function NosMarques() {
   return (
     <section className="nosMarquesContainer">
-      <div className="carouselMarques">
-        <CarouselMarques>
-          {MARQUES_DATA.map((group, index) => (
-            <CarouselMarquesItem key={index}>
-              {group.map((marque) => (
-                <a
-                  key={marque.title}
-                  href={marque.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={marque.title}
-                >
-                  <img
-                    loading="lazy"
-                    src={marque.src}
-                    alt={`Logo ${marque.title}`}
-                  />
-                </a>
-              ))}
-            </CarouselMarquesItem>
-          ))}
-        </CarouselMarques>
-      </div>
+      <CarouselMarques>
+        {MARQUES_DATA.map((group, index) => (
+          <CarouselMarquesItem key={index}>
+            {group.map((marque) => (
+              <a
+                key={marque.title}
+                href={marque.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={marque.title}
+              >
+                <img
+                  loading="lazy"
+                  src={marque.src}
+                  alt={`Logo ${marque.title}`}
+                />
+              </a>
+            ))}
+          </CarouselMarquesItem>
+        ))}
+      </CarouselMarques>
     </section>
   );
 }

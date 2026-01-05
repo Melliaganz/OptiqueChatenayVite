@@ -22,6 +22,8 @@ function Footer() {
                 alt="Optique Chatenay Logo" 
                 loading="lazy"
                 decoding="async"
+                width="250px"
+                height="250px"
               />
             </Link>
           </div>

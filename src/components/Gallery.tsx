@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
-import { FaSpinner } from "react-icons/fa";
+import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import { storage } from "../lib/firebase";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 interface GalleryImage {
@@ -25,29 +24,17 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   useEffect(() => {
-    const firebaseConfig = {
-      apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-      authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-      databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
-      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-      appId: import.meta.env.VITE_FIREBASE_APP_ID,
-      measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-    };
+    const imagesRef = ref(storage, "images");
 
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-
-    const storageRef = firebase.storage().ref("images");
-    storageRef
-      .listAll()
+    listAll(imagesRef)
       .then(async (res) => {
         const imagePromises = res.items.map(async (itemRef) => {
           try {
-            const url = await itemRef.getDownloadURL();
-            const metadata = await itemRef.getMetadata();
+            const [url, metadata] = await Promise.all([
+              getDownloadURL(itemRef),
+              getMetadata(itemRef)
+            ]);
+            
             return {
               url,
               alt: metadata.name,
@@ -128,6 +115,7 @@ const Gallery = () => {
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
+              type="button"
               onClick={() => handlePageChange(page)}
               className={page === currentPage ? "selected-page" : "page"}
             >
@@ -140,15 +128,33 @@ const Gallery = () => {
       {selectedImage && (
         <div className="modal" onClick={() => setSelectedImage(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close" onClick={() => setSelectedImage(null)}>
+            <button 
+              className="close" 
+              onClick={() => setSelectedImage(null)}
+              aria-label="Fermer la galerie"
+              title="Fermer"
+              type="button"
+            >
               <MdClose />
-            </span>
+            </button>
             <img src={selectedImage.url} alt={selectedImage.alt} className="modal-image" />
             {selectedImage.description && <p className="title">{selectedImage.description}</p>}
-            <button className="modal-nav-button prev" onClick={handlePrevImage}>
+            <button 
+              className="modal-nav-button prev" 
+              onClick={handlePrevImage}
+              aria-label="Image précédente"
+              title="Précédent"
+              type="button"
+            >
               <MdChevronLeft size={40} />
             </button>
-            <button className="modal-nav-button next" onClick={handleNextImage}>
+            <button 
+              className="modal-nav-button next" 
+              onClick={handleNextImage}
+              aria-label="Image suivante"
+              title="Suivant"
+              type="button"
+            >
               <MdChevronRight size={40} />
             </button>
           </div>

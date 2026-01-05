@@ -1,16 +1,21 @@
-import React, { useEffect, useState, useCallback, useMemo, ReactNode } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import type { ReactNode } from "react";
 import { useSwipeable } from "react-swipeable";
 import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 
-interface CarouselProps {
+interface CarouselMarquesItemProps {
   children: ReactNode;
 }
 
-export const CarouselMarquesItem = ({ children }: { children: ReactNode }) => {
+export const CarouselMarquesItem = ({ children }: CarouselMarquesItemProps) => {
   return <div className="carouselMarques-item">{children}</div>;
 };
 
-const CarouselMarques = ({ children }: CarouselProps) => {
+interface CarouselMarquesProps {
+  children: ReactNode;
+}
+
+const CarouselMarques = ({ children }: CarouselMarquesProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [paused, setPaused] = useState<boolean>(false);
   const itemCount = React.Children.count(children);
@@ -44,13 +49,6 @@ const CarouselMarques = ({ children }: CarouselProps) => {
     trackMouse: true,
   });
 
-  const transformStyle = useMemo(
-    () => ({
-      transform: `translateX(-${activeIndex * 100}%)`,
-    }),
-    [activeIndex]
-  );
-
   return (
     <div
       {...handlers}
@@ -58,7 +56,10 @@ const CarouselMarques = ({ children }: CarouselProps) => {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="innerMarques" style={transformStyle}>
+      <div 
+        className="innerMarques" 
+        data-active-index={activeIndex}
+      >
         {children}
       </div>
       <div className="indicators">

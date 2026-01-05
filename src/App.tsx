@@ -46,8 +46,8 @@ function App() {
             <Route path="/gallerie" element={<GalleriedePhotos />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Footer />
         </Suspense>
+        <Footer />
       </main>
     </BrowserRouter>
   );

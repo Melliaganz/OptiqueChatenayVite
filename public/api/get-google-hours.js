@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
-  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-  const placeId = process.env.REACT_APP_GOOGLE_PLACE_ID;
+  const apiKey = process.env.VITE_GOOGLE_API_KEY;
+  const placeId = process.env.VITE_GOOGLE_PLACE_ID;
   const url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${apiKey}`;
 
   // Sécurité : Vérifier les variables d'environnement

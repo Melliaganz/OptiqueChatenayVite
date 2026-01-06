@@ -1240,7 +1240,10 @@ textarea {
   min-height: 440px;
   color: var(--black);
 }
-
+.scroll-top-wrapper{
+  position: absolute;
+  z-index: 999;
+}
 .bouttonValider,
 .pagination button {
   background-color: var(--pink);
@@ -1989,11 +1992,6 @@ textarea {
   border-radius: 15px;
   z-index: 2;
   border: 4px solid var(--white);
-}
-
-.imgBox:hover {
-  transform: translateY(-5px);
-  z-index: 3;
 }
 
 @media screen and (max-width: 992px) {

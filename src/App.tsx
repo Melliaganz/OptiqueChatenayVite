@@ -1,10 +1,15 @@
 import "./App.css";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ScrollTopButton from "./components/ScrollTopButton";
 
+// Composants critiques (affichés immédiatement au-dessus de la ligne de flottaison)
+import Header from "./components/Header";
+
+// Chargement différé pour les composants non critiques ou invisibles au chargement
+const Footer = lazy(() => import("./components/Footer"));
+const ScrollTopButton = lazy(() => import("./components/ScrollTopButton"));
+
+// Pages
 const Home = lazy(() => import("./components/Home"));
 const Mentions = lazy(() => import("./components/Mentions"));
 const Administration = lazy(() => import("./components/Administration"));
@@ -33,7 +38,6 @@ function App() {
       )}
 
       <Header />
-      <ScrollTopButton />
 
       <main className="mainContenu">
         <Suspense
@@ -46,8 +50,10 @@ function App() {
             <Route path="/gallerie" element={<GalleriedePhotos />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          
+          <ScrollTopButton />
+          <Footer />
         </Suspense>
-        <Footer />
       </main>
     </BrowserRouter>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdHandyman, MdArrowBackIos } from "react-icons/md";
+import "../styles/notfound.css";
 
 function NotFound() {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import CarouselMarques, { CarouselMarquesItem } from "./CarouselMarques";
+import "../styles/marques.css";
 
 import raybanLogo from "../img/marques/Ray-Ban_logo.svg.webp";
 import bensimonLogo from "../img/marques/Logo-bensimon.webp";
@@ -30,114 +31,34 @@ interface Marque {
 
 const MARQUES_DATA: Marque[][] = [
   [
-    {
-      href: "https://www.adcl.fr/whistler-hills",
-      title: "Whistler Hills",
-      src: whistlerLogo,
-    },
-    {
-      href: "https://www.facebook.com/profile.php?id=100054421093253",
-      title: "Paragraphe",
-      src: paragrapheLogo,
-    },
-    {
-      href: "https://woodyseyewear.com/fr/",
-      title: "Woodys",
-      src: woodysLogo,
-    },
-    {
-      href: "https://www.ray-ban.com/france",
-      title: "Ray-Ban",
-      src: raybanLogo,
-    },
+    { href: "https://www.adcl.fr/whistler-hills", title: "Whistler Hills", src: whistlerLogo },
+    { href: "https://www.facebook.com/profile.php?id=100054421093253", title: "Paragraphe", src: paragrapheLogo },
+    { href: "https://woodyseyewear.com/fr/", title: "Woodys", src: woodysLogo },
+    { href: "https://www.ray-ban.com/france", title: "Ray-Ban", src: raybanLogo },
   ],
   [
-    {
-      href: "https://www.nafnaf.com/",
-      title: "Naf Naf",
-      src: nafnafLogo,
-    },
-    {
-      href: "https://www.xaviergarcia.design/",
-      title: "Xavier Garcia",
-      src: xavierGarciaLogo,
-    },
-    {
-      href: "https://www.vogue-eyewear.com/fr",
-      title: "Vogue Eyewear",
-      src: vogueLogo,
-    },
-    {
-      href: "https://www.ripcurl.eu/fr/mens/sunglasses.html",
-      title: "Rip Curl",
-      src: ripcurlLogo,
-    },
+    { href: "https://www.nafnaf.com/", title: "Naf Naf", src: nafnafLogo },
+    { href: "https://www.xaviergarcia.design/", title: "Xavier Garcia", src: xavierGarciaLogo },
+    { href: "https://www.vogue-eyewear.com/fr", title: "Vogue Eyewear", src: vogueLogo },
+    { href: "https://www.ripcurl.eu/fr/mens/sunglasses.html", title: "Rip Curl", src: ripcurlLogo },
   ],
   [
-    {
-      href: "https://www.armani.com/fr-fr/emporio-armani/homme/lunettes/lunettes-de-soleil",
-      title: "Emporio Armani",
-      src: armaniLogo,
-    },
-    {
-      href: "https://www.ralphlauren.fr/fr/femmes/accessoires/lunettes-de-soleil/20305",
-      title: "Ralph Lauren",
-      src: ralphlaurenLogo,
-    },
-    {
-      href: "https://www.steppereyewear.com/fr/",
-      title: "Stepper",
-      src: stepperLogo,
-    },
-    {
-      href: "https://www.mauboussin-eyewear.com/",
-      title: "Mauboussin",
-      src: mauboussinLogo,
-    },
+    { href: "https://www.armani.com/fr-fr/emporio-armani/homme/lunettes/lunettes-de-soleil", title: "Emporio Armani", src: armaniLogo },
+    { href: "https://www.ralphlauren.fr/fr/femmes/accessoires/lunettes-de-soleil/20305", title: "Ralph Lauren", src: ralphlaurenLogo },
+    { href: "https://www.steppereyewear.com/fr/", title: "Stepper", src: stepperLogo },
+    { href: "https://www.mauboussin-eyewear.com/", title: "Mauboussin", src: mauboussinLogo },
   ],
   [
-    {
-      href: "https://morel-france.com/en/collections/koali",
-      title: "Koali",
-      src: morelLogo,
-    },
-    {
-      href: "https://kaleoscollection.com/fr_FR/",
-      title: "Kaleos",
-      src: kaleosLogo,
-    },
-    { 
-      href: "https://www.bensimon.com/", 
-      title: "Bensimon", 
-      src: bensimonLogo 
-    },
-    {
-      href: "https://www.seikovision.com/fr/montures/seiko/",
-      title: "SeikoVision",
-      src: seikoLogo,
-    },
+    { href: "https://morel-france.com/en/collections/koali", title: "Koali", src: morelLogo },
+    { href: "https://kaleoscollection.com/fr_FR/", title: "Kaleos", src: kaleosLogo },
+    { href: "https://www.bensimon.com/", title: "Bensimon", src: bensimonLogo },
+    { href: "https://www.seikovision.com/fr/montures/seiko/", title: "SeikoVision", src: seikoLogo },
   ],
   [
-    {
-      href: "https://www.airlight.com/",
-      title: "Airlight",
-      src: airlightLogo,
-    },
-    {
-      href: "https://vistan-brillen.de/fr",
-      title: "Vistan",
-      src: vistanLogo,
-    },
-    {
-      href: "https://www.invushop.com/fr-ch/",
-      title: "INVU",
-      src: invuLogo,
-    },
-    {
-      href: "https://www.lacoste.com/fr/lacoste/homme/accessoires/lunettes-de-soleil/",
-      title: "Lacoste",
-      src: lacostLogo,
-    },
+    { href: "https://www.airlight.com/", title: "Airlight", src: airlightLogo },
+    { href: "https://vistan-brillen.de/fr", title: "Vistan", src: vistanLogo },
+    { href: "https://www.invushop.com/fr-ch/", title: "INVU", src: invuLogo },
+    { href: "https://www.lacoste.com/fr/lacoste/homme/accessoires/lunettes-de-soleil/", title: "Lacoste", src: lacostLogo },
   ],
 ];
 
@@ -147,21 +68,22 @@ function NosMarques() {
       <CarouselMarques>
         {MARQUES_DATA.map((group, index) => (
           <CarouselMarquesItem key={index}>
-            {group.map((marque) => (
-              <a
-                key={marque.title}
-                href={marque.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={marque.title}
-              >
-                <img
-                  loading="lazy"
-                  src={marque.src}
-                  alt={`Logo ${marque.title}`}
-                />
-              </a>
-            ))}
+            <div className="carousel-marques-group">
+              {group.map((marque) => (
+                <a
+                  key={marque.title}
+                  href={marque.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={marque.title}
+                >
+                  <img
+                    src={marque.src}
+                    alt={`Logo ${marque.title}`}
+                  />
+                </a>
+              ))}
+            </div>
           </CarouselMarquesItem>
         ))}
       </CarouselMarques>

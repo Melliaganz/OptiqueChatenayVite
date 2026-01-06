@@ -1,5 +1,6 @@
 import React from "react";
 import logoalthigh from "../img/logoaltHighlyCompressed.webp";
+import "../styles/header.css";
 
 function Header() {
   return (
@@ -15,10 +16,9 @@ function Header() {
           className="header-logo-img"
           alt="logo Optique Chatenay"
           title="Accueil"
-          loading="eager"
-          fetchPriority="high"
           width="96" 
-          height="19" 
+          height="19"
+          {...{ fetchpriority: "high" }}
         />
       </a>
     </header>

@@ -3,6 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../lib/firebase";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import "../styles/administration.css"
 
 function Administration() {
   const [password, setPassword] = useState<string>("");

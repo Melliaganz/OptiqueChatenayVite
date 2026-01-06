@@ -1,0 +1,114 @@
+.adminBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.blockMotDePasseContainer {
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.blockMotDePasseContainer h1 {
+  margin-bottom: 30px;
+  color: var(--black);
+}
+
+.motDePasseForm,
+.containeruploadFichier {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.motDePasseInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.motDePasseInputWrapper input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#bouttonVisibilite {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+#bouttonVisibilite.activeButton {
+  color: var(--pink);
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.formulaire input[type="file"] {
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.formulaire textarea {
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.bouttonValider,
+.bouttonRose {
+  background-color: var(--pink);
+  color: var(--white);
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.bouttonValider:hover,
+.bouttonRose:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.bouttonRose:disabled {
+  background-color: var(--grey);
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  color: #666;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}

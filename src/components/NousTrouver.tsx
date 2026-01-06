@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { IoMailOutline } from "react-icons/io5";
 import { MdLocalPhone } from "react-icons/md";
+import "../styles/noustrouver.css";
 
 function NousTrouver() {
   const formSparkUrl = "https://submit-form.com/VNw27FMx";
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [showMap, setShowMap] = useState<boolean>(false);
 
-  const correctMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.563456789!2d2.2645!3d48.7654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzU1LjQiTiAywrAxNSc1Mi4yIkU!5e0!3m2!1sfr!2sfr!4v1234567890";
+  const correctMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.816402271813!2d2.2612!3d48.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzAwLjAiTiAywrAxNSc0MC4zIkU!5e0!3m2!1sfr!2sfr!4v123456789";
 
   const currentUrl =
     typeof window !== "undefined" ? window.location.origin : "/";
@@ -39,7 +39,6 @@ function NousTrouver() {
               <label>
                 <input placeholder="Nom" type="text" name="nom" required />
               </label>
-              <br />
               <label>
                 <input
                   placeholder="Prénom"
@@ -48,7 +47,6 @@ function NousTrouver() {
                   required
                 />
               </label>
-              <br />
               <label>
                 <input
                   placeholder="Numéro de téléphone"
@@ -57,11 +55,9 @@ function NousTrouver() {
                   required
                 />
               </label>
-              <br />
               <label>
                 <input placeholder="Email" type="email" name="email" required />
               </label>
-              <br />
               <label>
                 <textarea
                   placeholder="Que pouvons-nous faire pour vous ?"
@@ -69,7 +65,6 @@ function NousTrouver() {
                   required
                 />
               </label>
-              <br />
               <button
                 disabled={submitting}
                 type="submit"
@@ -125,7 +120,6 @@ function NousTrouver() {
               title="googleMaps"
               className="mapContainer"
               src={correctMapUrl}
-              loading="lazy"
             />
           ) : (
             <div className="mapPlaceholder">

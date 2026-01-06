@@ -4,6 +4,7 @@ import {
   MdOutlineAccountBalanceWallet,
   MdOutlineVisibility,
 } from "react-icons/md";
+import "../styles/choisirOptique.css";
 
 interface Feature {
   icon: ReactElement;
@@ -102,11 +103,8 @@ const ChoisirOptique = () => {
               <img
                 src={getResizedUrl(imgNormPath, "600x300")}
                 alt="Présentoir lunettes"
-                loading="lazy"
-                decoding="async"
                 width="600"
                 height="300"
-                style={{ contentVisibility: 'auto' }}
               />
             </div>
 
@@ -114,11 +112,8 @@ const ChoisirOptique = () => {
               <img
                 src={getResizedUrl(imgLargePath, "400x300")}
                 alt="Intérieur magasin"
-                loading="lazy"
-                decoding="async"
                 width="400"
                 height="300"
-                style={{ contentVisibility: 'auto' }}
               />
             </div>
           </div>

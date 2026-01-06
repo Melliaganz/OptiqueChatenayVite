@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import LogoOptique from "../img/logoaltHighlyCompressed.webp"; 
 import { FaFacebook } from "react-icons/fa";
+import "../styles/footer.css";
 
 function Footer() {
   const location = useLocation();
@@ -20,10 +21,8 @@ function Footer() {
                 src={LogoOptique} 
                 className="footer-logo-img"
                 alt="Optique Chatenay Logo" 
-                loading="lazy"
-                decoding="async"
-                width="250px"
-                height="250px"
+                width="250"
+                height="250"
               />
             </Link>
           </div>

@@ -1,7 +1,8 @@
 import "./App.css";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-
+import "./styles/variables.css";
+import "./styles/base.css";
 // Composants critiques (affichés immédiatement au-dessus de la ligne de flottaison)
 import Header from "./components/Header";
 

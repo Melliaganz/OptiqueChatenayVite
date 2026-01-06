@@ -2,6 +2,7 @@ import React from "react";
 import Horaires from "./Horaires";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { FaPhoneFlip } from "react-icons/fa6";
+import "../styles/accueil.css";
 
 function Accueil() {
   return (
@@ -14,9 +15,7 @@ function Accueil() {
         height="800"
         alt="Jeune femme souriante portant des lunettes de soleil"
         className="accueil-lcp-image"
-        fetchPriority="high"
-        decoding="sync"
-        loading="eager"
+        {...{ fetchpriority: "high" }}
       />
       <div className="accueilContainer">
         <div className="accueilBlocText">
@@ -28,7 +27,9 @@ function Accueil() {
             </h1>
             <div className="adressesEtTelBloc">
               <div className="adresseEtTel">
-                <span aria-hidden="true"><RiMapPin2Fill /></span>
+                <span aria-hidden="true">
+                  <RiMapPin2Fill />
+                </span>
                 <a
                   className="adresse"
                   href="https://goo.gl/maps/5D3itaxq6TTFxw9z6"
@@ -40,7 +41,9 @@ function Accueil() {
                 </a>
               </div>
               <div className="telephones">
-                <span aria-hidden="true"><FaPhoneFlip /></span>
+                <span aria-hidden="true">
+                  <FaPhoneFlip />
+                </span>
                 <a className="telephone" href="tel:+33146300359">
                   01 46 30 03 59
                 </a>
@@ -48,7 +51,8 @@ function Accueil() {
             </div>
             <div className="paragrapheAccueil">
               <p>
-                Venez découvrir notre magasin d'optique, où notre équipe de professionnels vous accueillera avec le sourire.
+                Venez découvrir notre magasin d'optique, où notre équipe de
+                professionnels vous accueillera avec le sourire.
               </p>
             </div>
             <div className="bouttonDecouvrir">

@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  background: var(--grey);
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fallback pour Safari iOS < 15.4 */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+#password-input,
+.formulaire input,
+.modal-content .close,
+.tableauHoraires pre,
+textarea {
+  font-family: Roboto, sans-serif;
+}
+
+.loading {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading.hidden {
+  opacity: 0;
+}
+
+.mainContenu {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.suspense-loader {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  z-index: 9999;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

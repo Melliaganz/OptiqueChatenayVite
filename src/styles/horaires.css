@@ -1,0 +1,104 @@
+.blocHoraires {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.blocHorairesTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.encadréOuvertFermé {
+  padding: 15px;
+  background-color: var(--blue);
+  border-radius: 12px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.blocTextHeures p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--black);
+}
+
+.blocTextHeures strong {
+  color: #2ecc71; /* Vert pour Ouvert */
+}
+
+.bouttonHoraires {
+  padding: 12px 24px;
+  background-color: var(--pink);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.bouttonHoraires:hover {
+  opacity: 0.9;
+}
+
+/* Popup / Modal Horaires */
+.tableauHoraires {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.textHorairesPopup {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.textHorairesPopup h2 {
+  margin-bottom: 30px;
+  color: var(--pinkContrast);
+  font-size: 2rem;
+}
+
+.horaires-pre-list {
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: var(--black);
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.horaires-holiday-notice {
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.bouttonMenuHoraires {
+  margin-top: 40px;
+  padding: 15px 40px;
+  background-color: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.horaires-loading-placeholder {
+  min-height: 44px;
+  width: 100%;
+}
+@media screen and (max-width: 576px) {
+  .horaires-pre-list {
+    font-size: 1rem;
+  }
+}

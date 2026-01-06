@@ -1,0 +1,50 @@
+.nosMarquesContainer {
+  padding: 60px 0;
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+/* Style des liens et logos dans le carousel */
+.carousel-marques-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+}
+
+.nosMarquesContainer a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 150px;
+  height: 80px;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.4s ease;
+}
+
+.nosMarquesContainer a:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.nosMarquesContainer img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-marques-group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .nosMarquesContainer a {
+    height: 60px;
+  }
+}

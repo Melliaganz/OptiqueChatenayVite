@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import type { ReactNode } from "react";
 import { useSwipeable } from "react-swipeable";
 import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
+import "../styles/carouselMarques.css";
 
 interface CarouselMarquesItemProps {
   children: ReactNode;

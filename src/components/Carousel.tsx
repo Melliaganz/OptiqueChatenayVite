@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from "react";
+import "../styles/carousel.css";
 
 const NosMarques = lazy(() => import("./NosMarques"));
 

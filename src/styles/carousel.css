@@ -1,0 +1,90 @@
+.sectionCarouselMarques {
+  background-color: var(--white);
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.carouselMarquesContainer {
+  margin: 0 auto;
+}
+
+.headerCarouselMarques {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 50px;
+  overflow: hidden;
+}
+
+.titreCarousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.h2CarouselMarques {
+  font-size: 3rem;
+  color: var(--black);
+  text-align: center;
+}
+
+.rondRose,
+.rondRose2 {
+  background-color: var(--pink);
+  border-radius: 50%;
+  min-width: 250px;
+  min-height: 250px;
+}
+
+.rondRose {
+  margin-left: -125px;
+}
+
+.rondRose2 {
+  margin-right: -125px;
+}
+
+.carouselMarquesInterieur {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.innerMarques {
+  display: flex;
+  transition: transform 0.3s ease-out;
+  transform: translateX(calc(var(--active-index) * -100%));
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--grey);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: var(--pink);
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 576px) {
+  .h2CarouselMarques {
+    font-size: 2rem;
+  }
+  .rondRose,
+  .rondRose2 {
+    display: none;
+  }
+}

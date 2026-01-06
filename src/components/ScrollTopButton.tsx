@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdArrowUpward } from "react-icons/md";
+import "../styles/scrolltop.css";
 
 const ScrollTopButton = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);

@@ -1,6 +1,7 @@
 import React from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
+import "../styles/mentions.css";
 
 function MentionLegales() {
   return (

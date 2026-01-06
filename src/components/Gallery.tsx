@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { storage } from "../lib/firebase";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import "../styles/gallery.css";
 
 interface GalleryImage {
   url: string;
@@ -103,8 +104,6 @@ const Gallery = () => {
               alt={image.alt}
               className="image"
               onClick={() => setSelectedImage(image)}
-              loading="lazy"
-              decoding="async"
             />
           </div>
         ))}

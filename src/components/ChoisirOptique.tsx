@@ -65,7 +65,7 @@ const ChoisirOptique = () => {
     return `${firebaseBucketUrl}${encodedPath}?alt=media`;
   };
 
-  const imgLargePath = "ImagesHorizon/ImagesHorizon_IMG-20221116-WA0001.webp";
+  const imgLargePath = "ImagesHorizon/Interieur.webp";
   const imgNormPath = "ImagesHorizon/image_2026-01-04_000751218 (1) (1).webp";
 
   return (
@@ -103,7 +103,7 @@ const ChoisirOptique = () => {
 
             <div className="imgBox boxBottom">
               <img
-                src={getResizedUrl(imgNormPath, "600x300")}
+                src={getResizedUrl(imgNormPath, "800x600")}
                 alt="Présentoir lunettes"
                 width="600"
                 height="300"
@@ -112,7 +112,7 @@ const ChoisirOptique = () => {
 
             <div className="imgBox boxTop">
               <img
-                src={getResizedUrl(imgLargePath, "400x300")}
+                src={getResizedUrl(imgLargePath, "800x600")}
                 alt="Intérieur magasin"
                 width="400"
                 height="300"

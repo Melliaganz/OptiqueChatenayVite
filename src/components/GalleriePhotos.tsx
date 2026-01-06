@@ -56,7 +56,7 @@ function GalleriePhotos() {
             <div className="bentoTag">Expertise</div>
             <img
               src={getResizedUrl(img2Path, "200x400")}
-              srcSet={`${getResizedUrl(img2Path, "200x400")} 200w, ${getResizedUrl(img2Path, "400x200")} 400w`}
+              srcSet={`${getResizedUrl(img2Path, "200x400")} 200w`}
               sizes="(max-width: 768px) 100vw, 400px"
               alt="Intérieur du magasin"
               loading="lazy"

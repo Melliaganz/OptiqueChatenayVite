@@ -18,11 +18,13 @@
 }
 
 .footer-logo-img {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: auto;
   object-fit: contain;
 }
-
+.headerFooterh3{
+  font-size: 6px;
+}
 .footerListe {
   display: flex;
   justify-content: center;

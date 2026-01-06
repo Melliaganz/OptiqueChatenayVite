@@ -100,10 +100,9 @@ const GalleriePhotos: React.FC = () => {
               <span className="bentoAction">Détails</span>
             </div>
             <img
-              // Utilisation du nouveau ratio pour Desktop
-              src={getResizedUrl(images.expertise.path, "400x350")}
+              src={getResizedUrl(images.expertise.path, "800x700")}
               srcSet={`
-                ${getResizedUrl(images.expertise.path, "400x350")} 400w,
+                ${getResizedUrl(images.expertise.path, "800x600")} 400w,
                 ${getResizedUrl(images.expertise.path, "800x700")} 800w
               `}
               sizes="(max-width: 1200px) 383px, 400px"

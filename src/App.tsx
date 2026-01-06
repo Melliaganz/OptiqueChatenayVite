@@ -1,14 +1,9 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-
-// Header est le seul composant critique importé normalement
 import Header from "./components/Header";
 
-// Chargement différé pour les composants non critiques
 const Footer = lazy(() => import("./components/Footer"));
 const ScrollTopButton = lazy(() => import("./components/ScrollTopButton"));
-
-// Pages
 const Home = lazy(() => import("./components/Home"));
 const Mentions = lazy(() => import("./components/Mentions"));
 const Administration = lazy(() => import("./components/Administration"));
@@ -39,21 +34,54 @@ function App() {
       <Header />
 
       <main className="mainContenu">
-        <Suspense
-          fallback={<div className="suspense-loader" style={{ minHeight: '50vh' }}>Chargement...</div>}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/mentions-legales" element={<Mentions />} />
-            <Route path="/administration" element={<Administration />} />
-            <Route path="/gallerie" element={<GalleriedePhotos />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          
-          <ScrollTopButton />
-          <Footer />
-        </Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={null}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/mentions-legales"
+            element={
+              <Suspense fallback={null}>
+                <Mentions />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/administration"
+            element={
+              <Suspense fallback={null}>
+                <Administration />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/gallerie"
+            element={
+              <Suspense fallback={null}>
+                <GalleriedePhotos />
+              </Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={null}>
+                <NotFound />
+              </Suspense>
+            }
+          />
+        </Routes>
       </main>
+
+      <Suspense fallback={null}>
+        <ScrollTopButton />
+        <Footer />
+      </Suspense>
     </BrowserRouter>
   );
 }

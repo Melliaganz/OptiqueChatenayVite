@@ -14,6 +14,11 @@ export default defineConfig({
     }),
   ],
   build: {
+    // 1. Désactive explicitement le polyfill qui génère le JS inutilisé
+    modulePreload: {
+      polyfill: false,
+    },
+    // 2. Optimisation du rendu
     minify: "esbuild",
     cssCodeSplit: false,
     assetsInlineLimit: 100000000,

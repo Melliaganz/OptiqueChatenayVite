@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import LogoOptique from "../img/logoaltHighlyCompressed.webp"; 
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import "../styles/footer.css";
 
 function Footer() {
@@ -28,7 +28,7 @@ function Footer() {
           </div>
 
           <div className='headerFooterh3'>
-            <h3>Optique Chatenay</h3>
+            <h1>Optique Chatenay</h1>
           </div>
 
           <div className='logoReseaux'>
@@ -40,6 +40,11 @@ function Footer() {
                 title="Suivez-nous sur Facebook"
               >
                 <FaFacebook size={24} />
+              </a>
+            </div>
+            <div className='instagram'>
+              <a href="https://www.instagram.com/optique.chatenay92/" target="_blank" rel='noopener noreferrer' title="Suivez nous sur instagram">
+              <FaInstagram size={24} />
               </a>
             </div>
           </div>

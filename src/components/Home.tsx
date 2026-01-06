@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import Accueil from "./Accueil";
 
 const Carousel = lazy(() => import("./Carousel"));
@@ -7,15 +7,32 @@ const NousTrouver = lazy(() => import("./NousTrouver"));
 const GalleriePhotos = lazy(() => import("./GalleriePhotos"));
 
 function Home() {
+  const [loadMore, setLoadMore] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setLoadMore(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <Accueil />
 
       <Suspense fallback={<div className="suspense-loader" />}>
-        <Carousel />
-        <GalleriePhotos />
-        <ChoisirOptique />
-        <NousTrouver />
+        {loadMore && (
+          <>
+            <Carousel />
+            <GalleriePhotos />
+            <ChoisirOptique />
+            <NousTrouver />
+          </>
+        )}
       </Suspense>
     </>
   );

@@ -52,6 +52,21 @@ const FEATURES: Feature[] = [
 ];
 
 const ChoisirOptique = () => {
+  const firebaseBucketUrl =
+    "https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/";
+
+  const getResizedUrl = (fullPath: string, size: string) => {
+    const dotIndex = fullPath.lastIndexOf(".");
+    const name = fullPath.substring(0, dotIndex);
+    const ext = fullPath.substring(dotIndex);
+    const resizedPath = `${name}_${size}${ext}`;
+    const encodedPath = encodeURIComponent(resizedPath);
+    return `${firebaseBucketUrl}${encodedPath}?alt=media`;
+  };
+
+  const imgLargePath = "ImagesHorizon/ImagesHorizon_IMG-20221116-WA0001.webp";
+  const imgNormPath = "ImagesHorizon/image_2026-01-04_000751218 (1) (1).webp";
+
   return (
     <section id="decouvrir" className="choisirOptiqueChatenaySection">
       <div className="choisirOptiqueContainer">
@@ -79,38 +94,38 @@ const ChoisirOptique = () => {
             </div>
           ))}
         </div>
+        <div className="photoVoirContainer">
+          <div className="imagesVisualStack">
+            <div className="stackBackgroundCircle"></div>
 
-        <div className="imagesContainerChoisir">
-          <div className="imagesCadreContainer">
-            <div className="imagesLargeContainer">
+            <div className="imgBox boxBottom">
               <img
-                src="https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/ImagesHorizon%2FImagesHorizon_IMG-20221116-WA0001.webp?alt=media"
-                alt="Intérieur magasin"
-                className="zoomed"
+                src={getResizedUrl(imgNormPath, "600x300")}
+                alt="Présentoir lunettes"
                 loading="lazy"
-                width="250px"
-                height="250px"
+                decoding="async"
+                width="600"
+                height="300"
+                style={{ contentVisibility: 'auto' }}
               />
             </div>
 
-            {/* Le rond rose est maintenant un enfant direct du cadre pour rester lié aux images */}
-            <div className="rondRoseDynamique"></div>
-
-            <div className="imageNormContainer">
+            <div className="imgBox boxTop">
               <img
-                src="https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/ImagesHorizon%2Fimage_2026-01-04_000751218.webp?alt=media"
-                alt="Présentoir"
-                className="zoomed2"
+                src={getResizedUrl(imgLargePath, "400x300")}
+                alt="Intérieur magasin"
                 loading="lazy"
-                width="250px"
-                height="250px"
+                decoding="async"
+                width="400"
+                height="300"
+                style={{ contentVisibility: 'auto' }}
               />
             </div>
           </div>
+          <div className="voirConditions">
+            <p>Voir conditions en magasin *</p>
+          </div>
         </div>
-      </div>
-      <div className="voirConditions">
-        <p>Voir conditions en magasin *</p>
       </div>
     </section>
   );

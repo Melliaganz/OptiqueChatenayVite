@@ -2,99 +2,81 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function GalleriePhotos() {
-  const firebaseUrl =
+  const firebaseBucketUrl =
     "https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/";
 
+  const getResizedUrl = (fullPath: string, size: string) => {
+    const dotIndex = fullPath.lastIndexOf('.');
+    const name = fullPath.substring(0, dotIndex);
+    const ext = fullPath.substring(dotIndex);
+    const resizedPath = `${name}_${size}${ext}`;
+    const encodedPath = encodeURIComponent(resizedPath);
+    return `${firebaseBucketUrl}${encodedPath}?alt=media`;
+  };
+
+  const img1Path = "ImagesHorizon/Vitrine.webp";
+  const img2Path = "ImagesHorizon/Interieur.webp";
+  const imgVerticalPath = "ImagesVertical/imagesVertical.webp";
+
   return (
-    <section id="decouvrez" className="sectionGalleriePhotos">
-      <div className="gallerieDimageInterieur">
-        <h1>Galerie Photos</h1>
-        <div className="imagesGalleriesContainer">
-          <div className="imagesHorizontalContainer">
-            <div className="premiereImageGallerie">
-              <Link to="/gallerie" title="Voir la galerie de photos">
-                <img
-                  src={`${firebaseUrl}ImagesHorizon%2FImagesHorizon_2021-10-15.webp?alt=media`}
-                  alt="Intérieur du magasin Optique Chatenay"
-                  className="gallery-img-fit"
-                  loading="lazy"
-                  decoding="async"
-                  width="887"
-                  height="443"
-                  style={{
-                    objectFit: "cover",
-                    aspectRatio: "887 / 443",
-                    width: "100%",
-                    maxWidth: "887px",
-                    height: "auto",
-                  }}
-                />
-              </Link>
+    <section id="decouvrez" className="sectionGallerieBento">
+      <div className="bentoContainer">
+        <div className="bentoGrid">
+          
+          <Link to="/gallerie" className="bentoItem item-main" title="Voir la galerie">
+            <div className="bentoTag">Le Magasin</div>
+            <img
+              src={getResizedUrl(img1Path, "800x600")}
+              srcSet={`${getResizedUrl(img1Path, "400x300")} 400w, ${getResizedUrl(img1Path, "800x600")} 800w`}
+              sizes="(max-width: 768px) 100vw, 740px"
+              alt="Vitrine Optique Chatenay"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              width="740"
+              height="400"
+            />
+          </Link>
+
+          <Link to="/gallerie" className="bentoItem item-side" title="Voir la galerie">
+            <div className="bentoTag">Collections</div>
+            <img
+              src={getResizedUrl(imgVerticalPath, "400x800")}
+              srcSet={`${getResizedUrl(imgVerticalPath, "200x400")} 200w, ${getResizedUrl(imgVerticalPath, "400x800")} 400w`}
+              sizes="(max-width: 768px) 50vw, 420px"
+              alt="Montures de lunettes"
+              loading="lazy"
+              decoding="async"
+              width="420"
+              height="840"
+            />
+          </Link>
+
+          <Link to="/gallerie" className="bentoItem item-bottom" title="Voir la galerie">
+            <div className="bentoTag">Expertise</div>
+            <img
+              src={getResizedUrl(img2Path, "200x400")}
+              srcSet={`${getResizedUrl(img2Path, "200x400")} 200w, ${getResizedUrl(img2Path, "400x200")} 400w`}
+              sizes="(max-width: 768px) 100vw, 400px"
+              alt="Intérieur du magasin"
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="420"
+            />
+          </Link>
+
+          <div className="bentoInfo">
+            <div className="bentoText">
+              <span>Immersion</span>
+              <h2>Notre Galerie</h2>
+              <p>Explorez notre espace et nos dernières collections en un clic.</p>
             </div>
-            <div className="secondeImageGallerie">
-              <Link to="/gallerie" title="Voir la galerie de photos">
-                <img
-                  src={`${firebaseUrl}ImagesHorizon%2FImagesHorizon_IMG-20221116-WA0001.webp?alt=media`}
-                  alt="Rayonnage de lunettes de vue"
-                  className="gallery-img-fit"
-                  loading="lazy"
-                  decoding="async"
-                  width="572"
-                  height="191"
-                  style={{
-                    objectFit: "cover",
-                    aspectRatio: "572 / 191",
-                    width: "100%",
-                    maxWidth: "572px",
-                    height: "auto",
-                  }}
-                />
-              </Link>
-            </div>
-            <div className="troisiemeImageGallerie">
-              <Link to="/gallerie" title="Voir la galerie de photos">
-                <img
-                  src={`${firebaseUrl}ImagesHorizon%2FImagesHorizon_IMG-20221116-WA0001.webp?alt=media`}
-                  alt="Espace accueil du magasin"
-                  className="gallery-img-fit"
-                  loading="lazy"
-                  decoding="async"
-                  width="572"
-                  height="191"
-                  style={{
-                    objectFit: "cover",
-                    aspectRatio: "572 / 191",
-                    width: "100%",
-                    maxWidth: "572px",
-                    height: "auto",
-                  }}
-                />
-              </Link>
-            </div>
-          </div>
-          <div className="imagesVerticales">
-            <Link to="/gallerie" title="Voir la galerie de photos">
-              <img
-                src={`${firebaseUrl}ImagesVertical%2FImagesVertical_5bd0d265-3e52-41ce-919f-ee2b72194ea9%20(3).webp?alt=media`}
-                alt="Détail de montures optiques"
-                className="gallery-img-fit"
-                loading="lazy"
-                decoding="async"
-                width="591"
-                height="443"
-                style={{
-                  objectFit: "cover",
-                  aspectRatio: "591 / 443",
-                  width: "100%",
-                  maxWidth: "591px",
-                  height: "auto",
-                }}
-              />
+            <Link to="/gallerie" className="bentoBtn">
+              Découvrir
             </Link>
           </div>
-        </div>
-        <div className="titreGalleriePhotos">
-          <h3>Cliquez sur une image et découvrez notre galerie photo</h3>
+
         </div>
       </div>
     </section>

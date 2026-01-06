@@ -3,43 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <meta name="theme-color" content="#ffffff" />
     <title>Optique Châtenay - Soins et conseils pour vos yeux</title>
-    <meta name="description" content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux." />
+    <meta
+      name="description"
+      content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
+    />
 
     <link rel="canonical" href="https://www.optiquechatenay.fr/" />
-    <link rel="alternate" hreflang="fr" href="https://www.optiquechatenay.fr/" />
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://www.optiquechatenay.fr/"
+    />
 
-    <link rel="preload" as="image" href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp" fetchpriority="high" />
-    <link rel="preload" href="/fonts/roboto-v30-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/roboto-v30-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/roboto-v30-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/favicon-512x512.png" as="image" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
+      fetchpriority="high"
+    />
+
+    <link
+      rel="preload"
+      href="/fonts/roboto-v30-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
     <style>
-      /* CSS Critique avec URLs absolues pour éviter les erreurs de résolution Vite */
+      /* Correction des chemins : Utilisation de chemins relatifs ./ pour forcer la résolution locale */
       @font-face {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 300;
         font-display: swap;
-        src: local("Roboto Light"), url("/fonts/roboto-v30-latin-300.woff2") format("woff2");
+        /* Remplace {nomdelapolice} par le vrai nom du dossier sur ton PC */
+        src: local("Roboto Light"),
+          url("/fonts/roboto/static/roboto-v30-latin-300.woff2") format("woff2");
       }
       @font-face {
-        font-family: "Roboto";
         font-family: "Roboto";
         font-style: normal;
         font-weight: 500;
         font-display: swap;
-        src: local("Roboto Medium"), url("/fonts/roboto-v30-latin-500.woff2") format("woff2");
+        src: local("Roboto Medium"),
+          url("/fonts/roboto/static/roboto-v30-latin-500.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 700;
         font-display: swap;
-        src: local("Roboto Bold"), url("/fonts/roboto-v30-latin-700.woff2") format("woff2");
+        src: local("Roboto Bold"),
+          url("/fonts/roboto/static/roboto-v30-latin-700.woff2") format("woff2");
       }
 
       body {
@@ -47,7 +69,9 @@
         font-family: "Roboto", system-ui, -apple-system, sans-serif;
         background-color: #f0f0f0;
       }
-      #root { min-height: 100vh; }
+      #root {
+        min-height: 100vh;
+      }
       .accueil {
         position: relative;
         min-height: 100vh;
@@ -62,22 +86,7 @@
         z-index: 1;
         object-fit: cover;
       }
-      @supports (aspect-ratio: 1400 / 800) {
-        .accueil-lcp-image { aspect-ratio: 1400 / 800; }
-      }
     </style>
-
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
-    <meta name="robots" content="index, follow" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.optiquechatenay.fr/" />
-    <meta property="og:title" content="Optique Châtenay" />
-    <meta property="og:description" content="Découvrez notre magasin d'optique, où nos professionnels vous offrent les meilleurs conseils pour vos yeux." />
-    <meta property="og:image" content="https://www.optiquechatenay.fr/assets/logoaltHighlyCompressed-A7BL8MQu.webp" />
-    <meta property="og:image:alt" content="Logo Optique Chatenay" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="/logo.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -91,7 +100,10 @@
       <section class="accueil">
         <img
           src="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-          srcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
+          srcset="
+            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp   800w,
+            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w
+          "
           sizes="100vw"
           width="1400"
           height="800"

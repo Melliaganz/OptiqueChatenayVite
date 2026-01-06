@@ -1,12 +1,10 @@
-import "./App.css";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import "./styles/variables.css";
-import "./styles/base.css";
-// Composants critiques (affichés immédiatement au-dessus de la ligne de flottaison)
+
+// Header est le seul composant critique importé normalement
 import Header from "./components/Header";
 
-// Chargement différé pour les composants non critiques ou invisibles au chargement
+// Chargement différé pour les composants non critiques
 const Footer = lazy(() => import("./components/Footer"));
 const ScrollTopButton = lazy(() => import("./components/ScrollTopButton"));
 
@@ -42,7 +40,7 @@ function App() {
 
       <main className="mainContenu">
         <Suspense
-          fallback={<div className="suspense-loader">Chargement...</div>}
+          fallback={<div className="suspense-loader" style={{ minHeight: '50vh' }}>Chargement...</div>}
         >
           <Routes>
             <Route path="/" element={<Home />} />

@@ -1,6 +1,6 @@
 .contactezNousSection {
   padding: 80px 20px;
-  background-color: var(--blue);
+  background-color: var(--white);
 }
 
 .nousTrouverContainer {
@@ -44,6 +44,7 @@
   font-size: 1rem;
   font-family: inherit;
   box-sizing: border-box;
+  background-color: var(--white);
 }
 
 .formulaireContact textarea {
@@ -54,7 +55,7 @@
 .bouttonRose {
   padding: 15px;
   background-color: var(--pink);
-  color: var(--white);
+  color: var(--black);
   border: none;
   border-radius: 8px;
   font-weight: bold;
@@ -76,12 +77,16 @@
 }
 
 .telephoneInfos {
+  gap: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
   align-items: center;
   background: var(--white);
   padding: 20px;
   border-radius: 12px;
+  line-height: 1;
 }
 
 .contactTitre h3 {
@@ -131,6 +136,7 @@
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
+  color: var(--black);
 }
 
 @media screen and (max-width: 992px) {

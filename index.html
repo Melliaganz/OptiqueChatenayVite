@@ -10,21 +10,35 @@
       content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
     />
 
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
-    <link rel="preconnect" href="https://calendrier.api.gouv.fr" />
+    <link rel="canonical" href="https://www.optiquechatenay.fr/" />
+    <link rel="alternate" hreflang="fr" href="https://www.optiquechatenay.fr/" />
 
     <link
       rel="preload"
-      href="/api/get-google-hours"
-      as="fetch"
-      crossorigin="anonymous"
+      as="image"
+      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
     />
-    <link
-      rel="preload"
-      href="https://calendrier.api.gouv.fr/jours-feries/metropole/2026.json"
-      as="fetch"
-      crossorigin="anonymous"
-    />
+
+    <style>
+      #root { min-height: 100vh; }
+      .accueil {
+        position: relative;
+        min-height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .accueil-lcp-image {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 1;
+        object-fit: cover;
+      }
+      @supports (aspect-ratio: 1400 / 800) {
+        .accueil-lcp-image { aspect-ratio: 1400 / 800; }
+      }
+    </style>
+
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
 
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
@@ -42,10 +56,7 @@
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Optique Châtenay" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Optique Châtenay - Soins et conseils pour vos yeux"
-    />
+    <meta name="twitter:title" content="Optique Châtenay - Soins et conseils pour vos yeux" />
     <meta
       name="twitter:description"
       content="Découvrez notre magasin d'optique à Châtenay pour des conseils de qualité."
@@ -57,46 +68,13 @@
 
     <link rel="icon" href="/logo.ico" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon-192x192.png"
-      sizes="192x192"
-    />
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <link
-      rel="alternate"
-      hreflang="fr"
-      href="https://www.optiquechatenay.fr/"
-    />
-    <link rel="canonical" href="https://www.optiquechatenay.fr/" />
-
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <link rel="manifest" href="/site.webmanifest" />
-    <style>
-      #root { min-height: 100vh; }
-      .accueil { position: relative; min-height: 100vh; background-color: #f0f0f0; }
-      .accueil-lcp-image {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        z-index: 1;
-        object-fit: cover;
-      }
-      @supports (aspect-ratio: 1400 / 800) {
-        .accueil-lcp-image {
-          aspect-ratio: 1400 / 800;
-        }
-      }
-    </style>
   </head>
   <body>
     <noscript>Vous devez activer JavaScript pour visualiser ce site.</noscript>
@@ -104,7 +82,10 @@
       <section class="accueil">
         <img
           src="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-          srcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
+          srcset="
+            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp   800w,
+            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w
+          "
           sizes="100vw"
           width="1400"
           height="800"

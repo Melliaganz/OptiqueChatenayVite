@@ -11,17 +11,17 @@
 
 .encadréOuvertFermé {
   padding: 15px;
-  background-color: var(--blue);
   border-radius: 12px;
   min-height: 80px;
   display: flex;
   align-items: center;
+  font-weight: 500;
 }
 
 .blocTextHeures p {
   margin: 0;
   font-size: 1rem;
-  color: var(--black);
+  color: var(--vert);
 }
 
 .blocTextHeures strong {
@@ -31,7 +31,7 @@
 .bouttonHoraires {
   padding: 12px 24px;
   background-color: var(--pink);
-  color: var(--white);
+  color: var(--black);
   border: none;
   border-radius: 8px;
   font-weight: 700;
@@ -46,7 +46,11 @@
 /* Popup / Modal Horaires */
 .tableauHoraires {
   position: fixed;
-  inset: 0;
+  /* Correction pour Safari < 14.5 : remplacement de inset par top/right/bottom/left */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: rgba(255, 255, 255, 0.98);
   z-index: 2000;
   display: flex;
@@ -81,6 +85,7 @@
   font-size: 0.9rem;
   font-style: italic;
   margin-top: 20px;
+  color: var(--pinkContrast);
 }
 
 .bouttonMenuHoraires {
@@ -93,10 +98,12 @@
   font-weight: bold;
   cursor: pointer;
 }
+
 .horaires-loading-placeholder {
   min-height: 44px;
   width: 100%;
 }
+
 @media screen and (max-width: 576px) {
   .horaires-pre-list {
     font-size: 1rem;

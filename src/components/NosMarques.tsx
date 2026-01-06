@@ -80,6 +80,10 @@ function NosMarques() {
                   <img
                     src={marque.src}
                     alt={`Logo ${marque.title}`}
+                    width="150"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </a>
               ))}

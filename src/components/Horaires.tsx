@@ -38,9 +38,15 @@ const StoreHours = React.memo(({ periods, holidays }: StoreHoursProps) => {
 
   const getNextOpeningTime = useCallback((pers: Period[]) => {
     const now = new Date();
-    const cur = now.getDay() * 10000 + now.getHours() * 100 + now.getMinutes();
-    const actualOpenings = pers.filter((p) => p.open.time !== "0000");
+    const parisTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+    const cur = parisTime.getDay() * 10000 + parisTime.getHours() * 100 + parisTime.getMinutes();
+    
+    const actualOpenings = pers
+      .filter((p) => p.open.time !== "0000")
+      .sort((a, b) => (a.open.day * 10000 + parseInt(a.open.time)) - (b.open.day * 10000 + parseInt(b.open.time)));
+
     if (actualOpenings.length === 0) return null;
+
     return (
       actualOpenings.find(
         (p) => p.open.day * 10000 + parseInt(p.open.time) > cur
@@ -48,19 +54,20 @@ const StoreHours = React.memo(({ periods, holidays }: StoreHoursProps) => {
     );
   }, []);
 
-  const today = new Date();
-  const dateStr = today.toLocaleDateString("en-CA");
+  const now = new Date();
+  const parisTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+  const dateStr = parisTime.toLocaleDateString("en-CA");
   const isHoliday = holidays.includes(dateStr);
-  const curDay = today.getDay();
+  const curDay = parisTime.getDay();
   const curTime =
-    today.getHours().toString().padStart(2, "0") +
-    today.getMinutes().toString().padStart(2, "0");
+    parisTime.getHours().toString().padStart(2, "0") +
+    parisTime.getMinutes().toString().padStart(2, "0");
 
   const currentPeriod = periods.find(
     (p) =>
       p.open.day === curDay &&
       curTime >= p.open.time &&
-      curTime <= p.close.time &&
+      curTime < p.close.time &&
       p.open.time !== "0000"
   );
 
@@ -110,33 +117,41 @@ const Horaires = () => {
         }
       }
 
-      try {
-        const year = new Date().getFullYear();
-        const [holidayRes, googleRes] = await Promise.all([
-          fetch(`https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`),
-          fetch("/api/get-google-hours"),
-        ]);
+      const runFetch = async () => {
+        try {
+          const year = new Date().getFullYear();
+          const [holidayRes, googleRes] = await Promise.all([
+            fetch(`https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`),
+            fetch("/api/get-google-hours"),
+          ]);
 
-        if (holidayRes.ok) {
-          const holidayData = await holidayRes.json();
-          const freshHolidays = Object.keys(holidayData);
-          setHolidays(freshHolidays);
-          localStorage.setItem(CACHE_KEY_HOLIDAYS, JSON.stringify(freshHolidays));
-        }
-
-        if (googleRes.ok) {
-          const data = await googleRes.json();
-          if (data.status === "OK" && data.result?.opening_hours?.periods) {
-            const freshPeriods = data.result.opening_hours.periods;
-            setApiStoreHours(freshPeriods);
-            localStorage.setItem(CACHE_KEY_HOURS, JSON.stringify(freshPeriods));
+          if (holidayRes.ok) {
+            const holidayData = await holidayRes.json();
+            const freshHolidays = Object.keys(holidayData);
+            setHolidays(freshHolidays);
+            localStorage.setItem(CACHE_KEY_HOLIDAYS, JSON.stringify(freshHolidays));
           }
+
+          if (googleRes.ok) {
+            const data = await googleRes.json();
+            if (data.status === "OK" && data.result?.opening_hours?.periods) {
+              const freshPeriods = data.result.opening_hours.periods;
+              setApiStoreHours(freshPeriods);
+              localStorage.setItem(CACHE_KEY_HOURS, JSON.stringify(freshPeriods));
+            }
+          }
+          localStorage.setItem(CACHE_KEY_TIME, Date.now().toString());
+        } catch (error) {
+          if (apiStoreHours.length === 0) setApiStoreHours(DEFAULT_HOURS);
+        } finally {
+          setIsLoading(false);
         }
-        localStorage.setItem(CACHE_KEY_TIME, Date.now().toString());
-      } catch (error) {
-        if (apiStoreHours.length === 0) setApiStoreHours(DEFAULT_HOURS);
-      } finally {
-        setIsLoading(false);
+      };
+
+      if (document.readyState === 'complete') {
+        setTimeout(runFetch, 2500);
+      } else {
+        window.addEventListener('load', () => setTimeout(runFetch, 2500));
       }
     };
 
@@ -145,9 +160,8 @@ const Horaires = () => {
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen);
 
-  const formatDayHours = (periods: Period[]) => {
+  const getFormattedDaysList = (periods: Period[]) => {
     const daysOrder = [1, 2, 3, 4, 5, 6, 0];
-    const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     const periodsByDay = periods.reduce(
       (acc: { [key: number]: Period[] }, p) => {
         if (!acc[p.open.day]) acc[p.open.day] = [];
@@ -157,19 +171,21 @@ const Horaires = () => {
       {}
     );
 
-    return daysOrder
-      .map((dayIndex) => {
-        const dayPeriods = periodsByDay[dayIndex];
-        const hours = dayPeriods
-          ?.map((p) => {
-            if (p.open.time === "0000") return "Fermé";
-            return `${p.open.time.slice(0, 2)}h${p.open.time.slice(2)} - ${p.close.time.slice(0, 2)}h${p.close.time.slice(2)}`;
-          })
-          .filter((h) => h !== "Fermé")
-          .join(" / ");
-        return `${days[dayIndex]} : ${hours || "Fermé"}`;
-      })
-      .join("\n");
+    return daysOrder.map((dayIndex) => {
+      const dayPeriods = periodsByDay[dayIndex];
+      const hours = dayPeriods
+        ?.map((p) => {
+          if (p.open.time === "0000") return null;
+          return `${p.open.time.slice(0, 2)}h${p.open.time.slice(2)} - ${p.close.time.slice(0, 2)}h${p.close.time.slice(2)}`;
+        })
+        .filter(Boolean)
+        .join(" / ");
+
+      return {
+        label: DAYS[dayIndex],
+        hours: hours || "Fermé"
+      };
+    });
   };
 
   const currentHours = apiStoreHours.length > 0 ? apiStoreHours : DEFAULT_HOURS;
@@ -193,9 +209,13 @@ const Horaires = () => {
           <div className="tableauHoraires">
             <div className="textHorairesPopup">
               <h2>Horaires du magasin</h2>
-              <pre className="horaires-pre-list">
-                {formatDayHours(currentHours)}
-              </pre>
+              <ul className="horaires-list">
+                {getFormattedDaysList(currentHours).map((item, idx) => (
+                  <li key={idx}>
+                    <strong>{item.label} :</strong> {item.hours}
+                  </li>
+                ))}
+              </ul>
               {holidays.length > 0 && (
                 <p className="horaires-holiday-notice">
                   * Les horaires peuvent varier les jours fériés.

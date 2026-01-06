@@ -12,7 +12,7 @@ interface GalleryImage {
 }
 
 const Spinner = () => (
-  <div className="loadingScreen">
+  <div className="loading-wrapper">
     <div className="loaderDeux" />
   </div>
 );
@@ -25,6 +25,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
     const imagesRef = ref(storage, "images");
 
     listAll(imagesRef)
@@ -51,13 +52,21 @@ const Gallery = () => {
         const filteredImages = (resolvedImages.filter((img) => img !== null) as GalleryImage[])
           .sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime());
 
-        setImages(filteredImages);
-        setLoading(false);
+        if (isMounted) {
+          setImages(filteredImages);
+          setLoading(false);
+        }
       })
       .catch((err) => {
-        setError(err);
-        setLoading(false);
+        if (isMounted) {
+          setError(err);
+          setLoading(false);
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handlePageChange = (page: number) => {
@@ -70,7 +79,7 @@ const Gallery = () => {
     e.stopPropagation();
     if (!selectedImage) return;
     const currentIndex = images.findIndex((img) => img.url === selectedImage.url);
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
     setSelectedImage(images[prevIndex]);
   };
 
@@ -78,7 +87,7 @@ const Gallery = () => {
     e.stopPropagation();
     if (!selectedImage) return;
     const currentIndex = images.findIndex((img) => img.url === selectedImage.url);
-    const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+    const nextIndex = (currentIndex + 1) % images.length;
     setSelectedImage(images[nextIndex]);
   };
 
@@ -87,41 +96,49 @@ const Gallery = () => {
   const startIndex = (currentPage - 1) * imagesPerPage;
   const currentImages = images.slice(startIndex, startIndex + imagesPerPage);
 
-  if (loading) return <Spinner />;
-  if (error) return <div className="galleriePhotoContainer"><p>Erreur: {error.message}</p></div>;
-
   return (
     <div className="galleriePhotoContainer">
       <div className="titreGalleriePhotosPage">
         <h1>Galerie de Photos</h1>
       </div>
 
-      <div className="image-grid" id="grilleImages">
-        {currentImages.map((image, index) => (
-          <div key={startIndex + index} className="image-container">
-            <img
-              src={image.url}
-              alt={image.alt}
-              className="image"
-              onClick={() => setSelectedImage(image)}
-            />
-          </div>
-        ))}
-      </div>
-
-      {totalPages > 1 && (
-        <div className="pagination">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              type="button"
-              onClick={() => handlePageChange(page)}
-              className={page === currentPage ? "selected-page" : "page"}
-            >
-              {page}
-            </button>
-          ))}
+      {loading ? (
+        <Spinner />
+      ) : error ? (
+        <div className="error-message">
+          <p>Erreur: {error.message}</p>
         </div>
+      ) : (
+        <>
+          <div className="image-grid" id="grilleImages">
+            {currentImages.map((image, index) => (
+              <div key={`${image.url}-${index}`} className="image-container">
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="image"
+                  onClick={() => setSelectedImage(image)}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="pagination">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => handlePageChange(page)}
+                  className={page === currentPage ? "selected-page" : "page"}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {selectedImage && (
@@ -136,8 +153,13 @@ const Gallery = () => {
             >
               <MdClose />
             </button>
+            
             <img src={selectedImage.url} alt={selectedImage.alt} className="modal-image" />
-            {selectedImage.description && <p className="title">{selectedImage.description}</p>}
+            
+            {selectedImage.description && (
+              <p className="title">{selectedImage.description}</p>
+            )}
+
             <button 
               className="modal-nav-button prev" 
               onClick={handlePrevImage}
@@ -147,6 +169,7 @@ const Gallery = () => {
             >
               <MdChevronLeft size={40} />
             </button>
+
             <button 
               className="modal-nav-button next" 
               onClick={handleNextImage}

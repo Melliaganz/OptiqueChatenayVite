@@ -40,6 +40,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 #bouttonVisibilite {
@@ -59,6 +61,31 @@
   color: var(--pink);
 }
 
+/* Onglets du Dashboard */
+.adminTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: var(--grey);
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  color: var(--black);
+}
+
+.tabButton.active {
+  background: var(--pink);
+  color: var(--white);
+}
+
+/* Formulaire et Preview */
 .formulaire {
   display: flex;
   flex-direction: column;
@@ -66,11 +93,38 @@
   text-align: left;
 }
 
-.formulaire input[type="file"] {
-  padding: 10px;
-  border: 2px dashed #ddd;
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: var(--blue);
+  border: 2px dashed var(--pink);
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.custom-file-upload:hover {
+  background: #e0e0e0;
+}
+
+.image-preview-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+}
+
+.image-preview {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  display: block;
 }
 
 .formulaire textarea {
@@ -79,8 +133,78 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   resize: vertical;
+  font-family: inherit;
+  background-color: var(--white);
+  color: var(--black);
 }
 
+/* Liste de gestion des images */
+.image-manager-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 5px;
+}
+
+.image-manager-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.image-manager-list::-webkit-scrollbar-thumb {
+  background: var(--grey);
+  border-radius: 10px;
+}
+
+.manager-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.manager-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--grey);
+}
+
+.manager-item .file-name {
+  flex: 1;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  color: #444;
+}
+
+.delete-btn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+  transform: scale(1.1);
+  background: #e60000;
+}
+
+/* Boutons */
 .bouttonValider,
 .bouttonRose {
   background-color: var(--pink);
@@ -111,4 +235,14 @@
   text-decoration: underline;
   cursor: pointer;
   font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+  .blockMotDePasseContainer {
+    padding: 20px;
+  }
+  
+  .adminTabs {
+    flex-direction: column;
+  }
 }

@@ -80,7 +80,9 @@ const ChoisirOptique = () => {
           {FEATURES.map((f, i) => (
             <div className="paragrapheTextChoisir" key={i}>
               <div className="paragraphe1">
-                <span className={f.cls}>{f.icon}</span>
+                <span className={`icon-wrapper ${i % 2 === 0 ? "pink-icon" : "blue-icon"}`}>
+                  {f.icon}
+                </span>
                 <h3 className="rose">{f.title}</h3>
               </div>
               <div className="liste">

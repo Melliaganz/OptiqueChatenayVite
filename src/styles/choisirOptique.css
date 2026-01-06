@@ -37,14 +37,24 @@
   margin-bottom: 10px;
 }
 
-.paragraphe1 span {
+.icon-wrapper {
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+}
+
+.pink-icon {
   color: var(--pink);
+  background-color: var(--blue);
+}
+
+.blue-icon {
+  color: var(--blue); 
+  background-color: var(--pink);
 }
 
 .rose {
@@ -101,10 +111,9 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border: 10px, var(--white) solid
+  border: 10px var(--white) solid;
 }
 
-/* Optimisation de rendu pour les navigateurs compatibles (Chrome/Edge) */
 @supports (content-visibility: auto) {
   .imgBox img {
     content-visibility: auto;

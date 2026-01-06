@@ -32,7 +32,7 @@ const GalleriePhotos: React.FC = () => {
       priority: "high",
     },
     collections: {
-      path: "ImagesVertical/imagesVertical.webp",
+      path: "ImagesVertical/Vertical.webp",
       alt: "Sélection de montures de lunettes",
       width: 400,
       height: 800,

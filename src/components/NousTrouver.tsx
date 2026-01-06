@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { IoMailOutline } from "react-icons/io5";
 import { MdLocalPhone } from "react-icons/md";
 import "../styles/noustrouver.css";
+import { LuMapPin } from "react-icons/lu";
 
 function NousTrouver() {
   const formSparkUrl = "https://submit-form.com/VNw27FMx";
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [showMap, setShowMap] = useState<boolean>(false);
 
-  const correctMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.816402271813!2d2.2612!3d48.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzAwLjAiTiAywrAxNSc0MC4zIkU!5e0!3m2!1sfr!2sfr!4v123456789";
+  const correctMapUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.816402271813!2d2.2612!3d48.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzAwLjAiTiAywrAxNSc0MC4zIkU!5e0!3m2!1sfr!2sfr!4v123456789";
 
   const currentUrl =
     typeof window !== "undefined" ? window.location.origin : "/";
@@ -114,7 +116,7 @@ function NousTrouver() {
             </div>
           </div>
         </div>
-        
+
         <div className="mapWrapper">
           <div className="mapLocation" onClick={() => setShowMap(true)}>
             {showMap ? (
@@ -125,6 +127,9 @@ function NousTrouver() {
               />
             ) : (
               <div className="mapPlaceholder">
+                <span>
+                  <LuMapPin size={32}/>
+                </span>
                 <p>Cliquez ici pour charger la carte</p>
               </div>
             )}

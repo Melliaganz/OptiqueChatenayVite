@@ -11,15 +11,10 @@ const GalleriedePhotos = lazy(() => import("./components/GalleriedePhotos"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(!0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    if (document.readyState === "complete") {
-      setIsLoading(!1);
-      return;
-    }
-    const handleLoad = () => setIsLoading(!1);
-    window.addEventListener("load", handleLoad, { once: !0 });
-    return () => window.removeEventListener("load", handleLoad);
+    setIsLoading(false);
   }, []);
 
   return (
@@ -33,48 +28,15 @@ function App() {
       <Header />
 
       <main className="mainContenu">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={null}>
-                <Home />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/mentions-legales"
-            element={
-              <Suspense fallback={null}>
-                <Mentions />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/administration"
-            element={
-              <Suspense fallback={null}>
-                <Administration />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/gallerie"
-            element={
-              <Suspense fallback={null}>
-                <GalleriedePhotos />
-              </Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={null}>
-                <NotFound />
-              </Suspense>
-            }
-          />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/mentions-legales" element={<Mentions />} />
+            <Route path="/administration" element={<Administration />} />
+            <Route path="/gallerie" element={<GalleriedePhotos />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
 
       <Suspense fallback={null}>

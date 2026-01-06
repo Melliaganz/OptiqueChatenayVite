@@ -1,12 +1,34 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
-import { viteSingleFile } from "vite-plugin-singlefile";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 export default defineConfig({
   plugins: [
     react(),
-    viteSingleFile(),
+    ViteImageOptimizer({
+      test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
+      includePublic: true,
+      logStats: true,
+      svg: {
+        multipass: true,
+        plugins: [
+          'preset-default',
+          'sortAttrs',
+          {
+            name: 'addAttributesToSVGElement',
+            params: {
+              attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+            },
+          },
+        ],
+      },
+      png: { quality: 80 },
+      jpeg: { quality: 75 },
+      jpg: { quality: 75 },
+      webp: { quality: 75 },
+      avif: { quality: 70 },
+    }),
     visualizer({
       open: false,
       filename: "stats.html",
@@ -14,19 +36,12 @@ export default defineConfig({
     }),
   ],
   build: {
-    // 1. Désactive explicitement le polyfill qui génère le JS inutilisé
     modulePreload: {
-      polyfill: false,
+      polyfill: false, 
     },
-    // 2. Optimisation du rendu
     minify: "esbuild",
-    cssCodeSplit: false,
-    assetsInlineLimit: 100000000,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
+    cssCodeSplit: true, 
+    assetsInlineLimit: 4096, 
   },
   resolve: {
     alias: {

@@ -2,9 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Optique Châtenay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <title>Optique Châtenay - Soins et conseils pour vos yeux</title>
     <meta
       name="description"
       content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
@@ -17,21 +20,18 @@
       rel="preload"
       as="image"
       href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
+      imagesrcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
+      imagesizes="100vw"
+      fetchpriority="high"
     />
 
     <style>
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
       #root { min-height: 100vh; }
-      .accueil {
-        position: relative;
-        min-height: 100vh;
-        background-color: #f0f0f0;
-      }
+      .accueil { position: relative; min-height: 100vh; background-color: #f0f0f0; }
       .accueil-lcp-image {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        z-index: 1;
-        object-fit: cover;
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 1; object-fit: cover;
       }
       @supports (aspect-ratio: 1400 / 800) {
         .accueil-lcp-image { aspect-ratio: 1400 / 800; }
@@ -39,42 +39,21 @@
     </style>
 
     <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
-
     <meta name="robots" content="index, follow" />
+
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.optiquechatenay.fr/" />
     <meta property="og:title" content="Optique Châtenay" />
-    <meta
-      property="og:description"
-      content="Découvrez notre magasin d'optique, où nos professionnels vous offrent les meilleurs conseils pour vos yeux."
-    />
-    <meta
-      property="og:image"
-      content="https://www.optiquechatenay.fr/static/media/logoalt.d6d353f3873a3a40d191.webp"
-    />
+    <meta property="og:description" content="Découvrez notre magasin d'optique, où nos professionnels vous offrent les meilleurs conseils pour vos yeux." />
+    <meta property="og:image" content="https://www.optiquechatenay.fr/static/media/logoalt.d6d353f3873a3a40d191.webp" />
     <meta property="og:image:alt" content="Logo Optique Chatenay" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:site_name" content="Optique Châtenay" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Optique Châtenay - Soins et conseils pour vos yeux" />
-    <meta
-      name="twitter:description"
-      content="Découvrez notre magasin d'optique à Châtenay pour des conseils de qualité."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.optiquechatenay.fr/static/media/logoalt.d6d353f3873a3a40d191.webp"
-    />
 
     <link rel="icon" href="/logo.ico" />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
     <link rel="manifest" href="/site.webmanifest" />
+
+    <script type="module" src="/src/main.tsx" defer></script>
   </head>
   <body>
     <noscript>Vous devez activer JavaScript pour visualiser ce site.</noscript>
@@ -82,18 +61,16 @@
       <section class="accueil">
         <img
           src="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-          srcset="
-            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp   800w,
-            /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w
-          "
+          srcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
           sizes="100vw"
           width="1400"
           height="800"
           alt="Jeune femme souriante portant des lunettes de soleil"
           class="accueil-lcp-image"
+          fetchpriority="high"
+          loading="eager"
         />
       </section>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

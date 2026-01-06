@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
+  position: relative; /* Important pour le positionnement du fond */
 }
 
 .titreNousTrouverh2 {
@@ -82,11 +83,11 @@
   flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-end;
-  align-items: center;
   background: var(--white);
   padding: 20px;
   border-radius: 12px;
   line-height: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .contactTitre h3 {
@@ -109,14 +110,36 @@
   display: flex;
 }
 
-/* Carte */
+/* Carte avec fond rose derrière */
+.mapWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapWrapper::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: 50%; /* Commence un peu après le bord gauche pour créer l'effet de décalage */
+  background-color: var(--pink);
+  border-radius: 0px 25px 25px 0px;
+  z-index: 0;
+}
+
 .mapLocation {
+  position: relative;
+  z-index: 1;
   border-radius: 20px;
   overflow: hidden;
+  width: 100%;
   height: 100%;
-  min-height: 400px;
+  min-height: 500px;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   background-color: #eee;
 }
 
@@ -143,7 +166,11 @@
   .nousTrouverContainer {
     grid-template-columns: 1fr;
   }
+  .mapWrapper::before {
+    display: none; /* On cache le décor sur mobile pour éviter les débordements */
+  }
   .mapLocation {
     height: 400px;
+    min-height: 400px;
   }
 }

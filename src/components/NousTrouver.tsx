@@ -114,18 +114,21 @@ function NousTrouver() {
             </div>
           </div>
         </div>
-        <div className="mapLocation" onClick={() => setShowMap(true)}>
-          {showMap ? (
-            <iframe
-              title="googleMaps"
-              className="mapContainer"
-              src={correctMapUrl}
-            />
-          ) : (
-            <div className="mapPlaceholder">
-              <p>Cliquez ici pour charger la carte</p>
-            </div>
-          )}
+        
+        <div className="mapWrapper">
+          <div className="mapLocation" onClick={() => setShowMap(true)}>
+            {showMap ? (
+              <iframe
+                title="googleMaps"
+                className="mapContainer"
+                src={correctMapUrl}
+              />
+            ) : (
+              <div className="mapPlaceholder">
+                <p>Cliquez ici pour charger la carte</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

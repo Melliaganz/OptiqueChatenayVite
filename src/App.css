@@ -1,6 +1,1 @@
-.suspense-loader {
-  min-height: 400px;
-  width: 100%;
-  display: flex;
-  background: var(--white);
-}
+.suspense-loader{min-height:400px;width:100%;display:flex;background:var(--white)}

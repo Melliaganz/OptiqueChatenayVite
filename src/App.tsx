@@ -11,15 +11,14 @@ const GalleriedePhotos = lazy(() => import("./components/GalleriedePhotos"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [isLoading, setIsLoading] = useState<boolean>(!0);
   useEffect(() => {
     if (document.readyState === "complete") {
-      setIsLoading(false);
+      setIsLoading(!1);
       return;
     }
-    const handleLoad = () => setIsLoading(false);
-    window.addEventListener("load", handleLoad, { once: true });
+    const handleLoad = () => setIsLoading(!1);
+    window.addEventListener("load", handleLoad, { once: !0 });
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 

@@ -1,4 +1,3 @@
-import React from "react";
 import logoalthigh from "../img/logoaltHighlyCompressed.webp";
 import "../styles/header.css";
 
@@ -18,11 +17,12 @@ function Header() {
           title="Accueil"
           width="96" 
           height="19"
-          {...{ fetchpriority: "high" }}
+          decoding="sync"
+          fetchPriority="high"
         />
       </a>
     </header>
   );
 }
 
-export default React.memo(Header);
+export default Header;

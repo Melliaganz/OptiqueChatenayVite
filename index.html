@@ -3,22 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <meta name="theme-color" content="#ffffff" />
     <title>Optique Châtenay - Soins et conseils pour vos yeux</title>
-    <meta name="description" content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux." />
+    <meta
+      name="description"
+      content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
+    />
 
     <link rel="canonical" href="https://www.optiquechatenay.fr/" />
-    <link rel="alternate" hreflang="fr" href="https://www.optiquechatenay.fr/" />
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://www.optiquechatenay.fr/"
+    />
 
-    <script type="module" src="/src/main.tsx"></script>
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
+      imagesrcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
 
-    <link rel="preload" as="image" href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp" fetchpriority="high" />
-
-    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-
+    <link
+      rel="preload"
+      href="/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/Roboto/roboto-condensed-v31-latin-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/Roboto/roboto-condensed-v31-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <style>
       @font-face {
         font-family: "Roboto";
@@ -26,7 +58,8 @@
         font-weight: 300;
         font-display: swap;
         src: local("Roboto Light"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2")
+            format("woff2");
       }
       @font-face {
         font-family: "Roboto";
@@ -34,7 +67,8 @@
         font-weight: 600;
         font-display: swap;
         src: local("Roboto Medium"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2")
+            format("woff2");
       }
       @font-face {
         font-family: "Roboto";
@@ -42,7 +76,8 @@
         font-weight: 700;
         font-display: swap;
         src: local("Roboto Bold"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2")
+            format("woff2");
       }
 
       body {
@@ -57,6 +92,7 @@
         position: relative;
         min-height: 100vh;
         overflow: hidden;
+        background-color: #f0f0f0;
       }
       .accueil-lcp-image {
         position: absolute;
@@ -68,20 +104,11 @@
         object-fit: cover;
       }
     </style>
-
     <link rel="icon" href="/logo.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+        <script type="module" src="/src/main.tsx"></script>
 
-    <script>
-      // Optimisation : on attend que Vite ait injecté les fichiers pour appliquer le media="print"
-      window.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-          link.media = 'print';
-          link.onload = function() { this.media = 'all'; };
-        });
-      });
-    </script>
   </head>
   <body>
     <noscript>Vous devez activer JavaScript pour visualiser ce site.</noscript>

@@ -1,33 +1,37 @@
-import { useEffect, useState, Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Home from "./components/Home"
+import Home from "./components/Home";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import ScrollTopButton from "./components/ScrollTopButton";
 
-// const Home = lazy(() => import("./components/Home"));
+const Footer = lazy(() => import("./components/Footer"));
 const Mentions = lazy(() => import("./components/Mentions"));
 const Administration = lazy(() => import("./components/Administration"));
 const GalleriedePhotos = lazy(() => import("./components/GalleriedePhotos"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loadFooter, setLoadFooter] = useState(false);
 
   useEffect(() => {
-    setIsLoading(false);
+    const triggerFooter = () => {
+      setLoadFooter(true);
+    };
+
+    window.addEventListener("scroll", triggerFooter, { once: true, passive: true });
+    window.addEventListener("mousemove", triggerFooter, { once: true, passive: true });
+    window.addEventListener("touchstart", triggerFooter, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", triggerFooter);
+      window.removeEventListener("mousemove", triggerFooter);
+      window.removeEventListener("touchstart", triggerFooter);
+    };
   }, []);
 
   return (
     <BrowserRouter>
-      {isLoading && (
-        <div className="progress-container" aria-hidden="true">
-          <div className="progress-bar" />
-        </div>
-      )}
-
       <Header />
-
       <main className="mainContenu">
         <Suspense fallback={null}>
           <Routes>
@@ -39,9 +43,11 @@ function App() {
           </Routes>
         </Suspense>
       </main>
-
       <ScrollTopButton />
-      <Footer />
+      
+      <Suspense fallback={null}>
+        {loadFooter && <Footer />}
+      </Suspense>
     </BrowserRouter>
   );
 }

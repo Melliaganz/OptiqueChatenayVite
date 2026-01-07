@@ -29,8 +29,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "prebuild": "node ./scripts/generate-sitemap.js || echo 'Sitemap skipped'",
-    "build": "tsc && vite build && node -e \"const fs = require('fs'); if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié dans dist'); }\"",
+    "build": "tsc && vite build && node -e \"import fs from 'fs'; if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié'); }\"",
     "preview": "vite preview",
     "clean": "rimraf node_modules dist .yarn/cache && yarn cache clean --all"
   },

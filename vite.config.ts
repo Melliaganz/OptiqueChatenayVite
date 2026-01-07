@@ -13,7 +13,13 @@ export default defineConfig({
       svg: {
         multipass: true,
         plugins: [
-          'preset-default',
+          {
+            name: 'preset-default',
+          },
+          {
+            name: 'removeViewBox',
+            active: false,
+          },
           'sortAttrs',
           {
             name: 'addAttributesToSVGElement',
@@ -37,11 +43,25 @@ export default defineConfig({
   ],
   build: {
     modulePreload: {
-      polyfill: false, 
+      polyfill: true,
     },
-    minify: "esbuild",
-    cssCodeSplit: true, 
-    assetsInlineLimit: 4096, 
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
+    assetsInlineLimit: 10240,
   },
   resolve: {
     alias: {

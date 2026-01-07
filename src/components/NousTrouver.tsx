@@ -55,10 +55,11 @@ function NousTrouver() {
                   type="tel"
                   name="tel"
                   required
+                  autoComplete="tel"
                 />
               </label>
               <label>
-                <input placeholder="Email" type="email" name="email" required />
+                <input placeholder="Email" type="email" name="email" required autoComplete="name" />
               </label>
               <label>
                 <textarea

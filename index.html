@@ -3,57 +3,38 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="theme-color" content="#ffffff" />
     <title>Optique Châtenay - Soins et conseils pour vos yeux</title>
-    <meta
-      name="description"
-      content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
-    />
+    <meta name="description" content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux." />
 
     <link rel="canonical" href="https://www.optiquechatenay.fr/" />
-    <link
-      rel="alternate"
-      hreflang="fr"
-      href="https://www.optiquechatenay.fr/"
-    />
+    <link rel="alternate" hreflang="fr" href="https://www.optiquechatenay.fr/" />
 
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-      fetchpriority="high"
-    />
+    <script type="module" src="/src/main.tsx"></script>
 
-    <link
-      rel="preload"
-      href="/fonts/roboto-v30-latin-500.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
+    <link rel="preload" as="image" href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp" fetchpriority="high" />
+
+    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Roboto/roboto-condensed-v31-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
     <style>
-      /* Correction des chemins : Utilisation de chemins relatifs ./ pour forcer la résolution locale */
       @font-face {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 300;
         font-display: swap;
-        /* Remplace {nomdelapolice} par le vrai nom du dossier sur ton PC */
         src: local("Roboto Light"),
-          url("/fonts/roboto/static/roboto-v30-latin-300.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
         font-style: normal;
-        font-weight: 500;
+        font-weight: 600;
         font-display: swap;
         src: local("Roboto Medium"),
-          url("/fonts/roboto/static/roboto-v30-latin-500.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
@@ -61,7 +42,7 @@
         font-weight: 700;
         font-display: swap;
         src: local("Roboto Bold"),
-          url("/fonts/roboto/static/roboto-v30-latin-700.woff2") format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
       }
 
       body {
@@ -92,7 +73,15 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <script type="module" src="/src/main.tsx" defer></script>
+    <script>
+      // Optimisation : on attend que Vite ait injecté les fichiers pour appliquer le media="print"
+      window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+          link.media = 'print';
+          link.onload = function() { this.media = 'all'; };
+        });
+      });
+    </script>
   </head>
   <body>
     <noscript>Vous devez activer JavaScript pour visualiser ce site.</noscript>
@@ -110,7 +99,7 @@
           alt="Jeune femme souriante portant des lunettes de soleil"
           class="accueil-lcp-image"
           fetchpriority="high"
-          decoding="async"
+          decoding="sync"
         />
       </section>
     </div>

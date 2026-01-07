@@ -17,7 +17,7 @@ const Carousel = () => {
           <div className="rondRose2"></div>
         </div>
         <div className="carouselMarquesInterieur">
-          <Suspense fallback={<div className="suspense-loader"></div>}>
+          <Suspense fallback={<div className="suspense-loader" style={{ minHeight: '150px' }}></div>}>
             <NosMarques />
           </Suspense>
         </div>

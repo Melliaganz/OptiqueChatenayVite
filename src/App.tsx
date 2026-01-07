@@ -1,10 +1,11 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Home from "./components/Home"
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ScrollTopButton from "./components/ScrollTopButton";
 
-const Footer = lazy(() => import("./components/Footer"));
-const ScrollTopButton = lazy(() => import("./components/ScrollTopButton"));
-const Home = lazy(() => import("./components/Home"));
+// const Home = lazy(() => import("./components/Home"));
 const Mentions = lazy(() => import("./components/Mentions"));
 const Administration = lazy(() => import("./components/Administration"));
 const GalleriedePhotos = lazy(() => import("./components/GalleriedePhotos"));
@@ -39,10 +40,8 @@ function App() {
         </Suspense>
       </main>
 
-      <Suspense fallback={null}>
-        <ScrollTopButton />
-        <Footer />
-      </Suspense>
+      <ScrollTopButton />
+      <Footer />
     </BrowserRouter>
   );
 }

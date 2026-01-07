@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import CarouselMarques, { CarouselMarquesItem } from "./CarouselMarques";
 import "../styles/marques.css";
 
@@ -62,7 +62,7 @@ const MARQUES_DATA: Marque[][] = [
   ],
 ];
 
-function NosMarques() {
+function NosMarquesContent() {
   return (
     <section className="nosMarquesContainer">
       <CarouselMarques>
@@ -95,4 +95,12 @@ function NosMarques() {
   );
 }
 
-export default React.memo(NosMarques);
+const NosMarquesMemo = React.memo(NosMarquesContent);
+
+export default function NosMarques() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '200px' }} />}>
+      <NosMarquesMemo />
+    </Suspense>
+  );
+}

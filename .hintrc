@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "img[fetchpriority]",
+          "img[decoding]",
+          "meta[name=theme-color]",
+          "link[imagesrcset]",
+          "link[imagesizes]",
+          "link[fetchpriority]"
+        ]
+      }
+    ]
+  }
+}

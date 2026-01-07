@@ -24,3 +24,15 @@ dist-ssr
 *.sw?
 .env
 stats.html
+# Yarn PnP
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Décommente la ligne suivante si tu ne veux PAS utiliser le "Zero Install" 
+# (recommandé au début pour garder ton repo léger)
+.yarn/cache

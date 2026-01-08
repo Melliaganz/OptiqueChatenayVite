@@ -4,17 +4,11 @@
     <meta charset="utf-8" />
     <title>Optique Châtenay - Soins et conseils pour vos yeux</title>
 
-    <script type="module" src="/src/main.tsx" fetchPriority="high"></script>
+    <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
-    <meta
-      name="description"
-      content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux."
-    />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta name="description" content="Découvrez notre magasin d'optique à Châtenay. Notre équipe vous offre les meilleurs conseils et soins pour vos yeux." />
 
     <link
       rel="preload"
@@ -22,7 +16,6 @@
       href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
       imagesrcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/imageJolie.webp"
       imagesizes="100vw"
-      fetchPriority="high"
     />
 
     <style>
@@ -32,8 +25,7 @@
         font-weight: 300;
         font-display: swap;
         src: local("Roboto Light"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2")
-            format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
@@ -41,8 +33,7 @@
         font-weight: 600;
         font-display: swap;
         src: local("Roboto Medium"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2")
-            format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
@@ -50,8 +41,7 @@
         font-weight: 700;
         font-display: swap;
         src: local("Roboto Bold"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2")
-            format("woff2");
+          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
       }
 
       body {
@@ -59,29 +49,13 @@
         font-family: "Roboto", system-ui, -apple-system, sans-serif;
         background-color: #f0f0f0;
       }
-      #root {
-        min-height: 100vh;
-      }
-      .accueil {
-        position: relative;
-        min-height: 100vh;
-        overflow: hidden;
-        background-color: #f0f0f0;
-      }
-      .accueil-lcp-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        object-fit: cover;
-      }
+      #root { min-height: 100vh; }
+      .accueil { position: relative; min-height: 100vh; overflow: hidden; background-color: #f0f0f0; }
+      .accueil-lcp-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; object-fit: cover; }
     </style>
 
     <link rel="icon" href="/logo.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>

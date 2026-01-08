@@ -8,8 +8,8 @@ function Accueil() {
   return (
     <section className="accueil" id="accueil">
       <img
-        src="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-        srcSet="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp 1400w"
+        src="/assets/imageJolie.webp"
+        srcSet="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/imageJolie.webp"
         sizes="100vw"
         width="1400"
         height="800"

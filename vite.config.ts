@@ -18,15 +18,13 @@ export default defineConfig({
   build: {
     target: "esnext",
     minify: "terser",
-    cssCodeSplit: false,
     modulePreload: {
-      polyfill: false, 
+      polyfill: false,
     },
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('firebase')) return 'v-fb';
-          if (id.includes('components/')) return 'ui-home';
         },
       },
     },

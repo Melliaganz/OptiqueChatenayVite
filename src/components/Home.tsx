@@ -22,9 +22,9 @@ function Home() {
 
   return (
     <>
-      <Accueil />
-
       <Suspense fallback={<div className="suspense-loader" />}>
+        <Accueil />
+
         {loadMore && (
           <>
             <Carousel />

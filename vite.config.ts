@@ -15,30 +15,37 @@ export default defineConfig({
       avif: { quality: 45 },
     }),
     // Ce plugin garantit que Lighthouse ne verra aucune dépendance en cascade
-    {
-      name: "force-preload-order",
-      enforce: "post", // S'exécute après que tous les autres plugins ont fini
-      transformIndexHtml(html) {
-        // 1. Extraire tous les preloads et les scripts modules
-        const preloads = html.match(/<link rel="modulepreload"[^>]*>/g) || [];
-        const scripts = html.match(/<script type="module"[^>]*><\/script>/g) || [];
-        
-        // 2. Supprimer les anciens emplacements
-        let cleanHtml = html
-          .replace(/<link rel="modulepreload"[^>]*>/g, "")
-          .replace(/<script type="module"[^>]*><\/script>/g, "");
-        
-        // 3. Réorganiser : Les preloads (engine, etc.) TOUJOURS avant les scripts
-        const optimizedBlock = [
-          "",
-          ...preloads,
-          "",
-          ...scripts
-        ].join("\n    ");
+{
+  name: "force-preload-order",
+  enforce: "post",
+  transformIndexHtml(html) {
+    // On extrait uniquement ce qui est dans le HEAD pour ne pas polluer le BODY
+    const headMatch = html.match(/<head>([\s\S]*?)<\/head>/);
+    if (!headMatch) return html;
 
-        return cleanHtml.replace("</head>", `  ${optimizedBlock}\n  </head>`);
-      }
-    }
+    let headContent = headMatch[1];
+    
+    // 1. Extraire preloads et scripts
+    const preloads = headContent.match(/<link rel="modulepreload"[^>]*>/g) || [];
+    const scripts = headContent.match(/<script type="module"[^>]*><\/script>/g) || [];
+    
+    // 2. Nettoyer le head de ces doublons
+    headContent = headContent
+      .replace(/<link rel="modulepreload"[^>]*>/g, "")
+      .replace(/<script type="module"[^>]*><\/script>/g, "");
+    
+    // 3. Re-insérer proprement à la fin du head
+    const optimizedBlock = [
+      "\n    ",
+      ...preloads,
+      "    ",
+      ...scripts,
+      ""
+    ].join("\n    ");
+
+    return html.replace(/<head>[\s\S]*?<\/head>/, `<head>${headContent}${optimizedBlock}</head>`);
+  }
+}
   ],
   build: {
     target: "esnext",

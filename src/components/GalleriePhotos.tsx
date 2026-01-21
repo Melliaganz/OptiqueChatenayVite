@@ -42,7 +42,7 @@ const GalleriePhotos: React.FC = () => {
       path: "ImagesHorizon/Interieur.webp",
       alt: "Intérieur du magasin et zone d'expertise",
       width: 400,
-      height: 350, // Ajusté selon ton "Rendered size"
+      height: 350,
       priority: "low",
     },
   };
@@ -74,6 +74,7 @@ const GalleriePhotos: React.FC = () => {
               fetchPriority="high"
               loading="eager"
               decoding="async"
+              crossOrigin="anonymous"
             />
           </Link>
 
@@ -91,6 +92,7 @@ const GalleriePhotos: React.FC = () => {
               height={800}
               loading="lazy"
               decoding="async"
+              crossOrigin="anonymous"
             />
           </Link>
 
@@ -100,10 +102,10 @@ const GalleriePhotos: React.FC = () => {
               <span className="bentoAction">Détails</span>
             </div>
             <img
-              src={getResizedUrl(images.expertise.path, "800x700")}
+              src={getResizedUrl(images.expertise.path, "800x600")}
               srcSet={`
-                ${getResizedUrl(images.expertise.path, "800x600")} 400w,
-                ${getResizedUrl(images.expertise.path, "800x700")} 800w
+                ${getResizedUrl(images.expertise.path, "400x300")} 400w,
+                ${getResizedUrl(images.expertise.path, "800x600")} 800w
               `}
               sizes="(max-width: 1200px) 383px, 400px"
               alt={images.expertise.alt}
@@ -111,6 +113,7 @@ const GalleriePhotos: React.FC = () => {
               height={350}
               loading="lazy"
               decoding="async"
+              crossOrigin="anonymous"
             />
           </Link>
 

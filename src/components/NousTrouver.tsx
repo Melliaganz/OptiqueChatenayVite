@@ -10,7 +10,7 @@ function NousTrouver() {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   const correctMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.563456789!2d2.2645!3d48.7654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzU1LjQiTiAywrAxNSc1Mi4yIkU!5e0!3m2!1sfr!2sfr!4v1234567890";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.620353457193!2d2.261266276856034!3d48.75091480826975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e677053075677b%3A0x6b49910e5494d48a!2s432%20Av.%20de%20la%20Div.%20Leclerc%2C%2092290%20Ch%C3%A2tenay-Malabry!5e0!3m2!1sfr!2sfr!4v1704500000000!5m2!1sfr!2sfr";
 
   const currentUrl =
     typeof window !== "undefined" ? window.location.origin : "/";

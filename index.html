@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Optique Châtenay - Opticien à Châtenay-Malabry : Soins et conseils</title>
+    <title>Optique Châtenay - Votre Opticien à Châtenay-Malabry</title>
 
     <meta 
       http-equiv="Content-Security-Policy" 
@@ -15,28 +15,54 @@
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Optique Châtenay : votre opticien de confiance à Châtenay-Malabry. Découvrez nos collections de lunettes, examens de vue et conseils personnalisés par nos experts." />
-    <meta name="keywords" content="opticien Châtenay-Malabry, lunettes de vue, examen de vue, lentilles de contact, lunettes de soleil, Optique Châtenay" />
+    <meta name="description" content="Optique Châtenay : experts en soins visuels à Châtenay-Malabry. Découvrez nos lunettes, examens de vue et conseils personnalisés." />
+    
+    <link rel="canonical" href="https://www.optiquechatenay.fr/" />
 
-    <meta property="og:title" content="Optique Châtenay - Soins et conseils pour vos yeux" />
-    <meta property="og:description" content="Votre opticien expert à Châtenay-Malabry. Prenez soin de votre vue avec nos collections exclusives." />
-    <meta property="og:image" content="https://www.optiquechatenay.fr/assets/imageJolie.webp" />
+    <meta property="og:title" content="Optique Châtenay - Votre Opticien à Châtenay-Malabry" />
+    <meta property="og:description" content="Expertise visuelle et montures exclusives à Châtenay-Malabry." />
     <meta property="og:url" content="https://www.optiquechatenay.fr/" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" type="image/x-icon" href="/logo.ico" />
-    <link rel="shortcut icon" href="/logo.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_1400.webp"
-      imagesrcset="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/imageJolie.webp"
-      imagesizes="100vw"
-    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "OpticalBusiness",
+        "name": "Optique Châtenay",
+        "image": "https://www.optiquechatenay.fr/assets/imageJolie.webp",
+        "@id": "https://www.optiquechatenay.fr",
+        "url": "https://www.optiquechatenay.fr",
+        "telephone": "+33146300359",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Votre Adresse Rue",
+          "addressLocality": "Châtenay-Malabry",
+          "postalCode": "92290",
+          "addressCountry": "FR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 48.765, 
+          "longitude": 2.278
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "10:00",
+            "closes": "19:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/votrepage",
+          "https://www.instagram.com/votreprofil"
+        ]
+      }
+    </script>
 
     <style>
       @font-face {
@@ -44,32 +70,16 @@
         font-style: normal;
         font-weight: 300;
         font-display: swap;
-        src: local("Roboto Light"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 600;
-        font-display: swap;
-        src: local("Roboto Medium"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-600.woff2") format("woff2");
+        src: local("Roboto Light"), url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
       }
       @font-face {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 700;
         font-display: swap;
-        src: local("Roboto Bold"),
-          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
+        src: local("Roboto Bold"), url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
       }
-
-      body {
-        margin: 0;
-        font-family: "Roboto", system-ui, -apple-system, sans-serif;
-        background-color: #f0f0f0;
-      }
-      #root { min-height: 100vh; }
+      body { margin: 0; font-family: "Roboto", sans-serif; background-color: #f0f0f0; }
     </style>
 
     <script type="module" src="/src/main.tsx" fetchPriority="high"></script>

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Optique Châtenay - Votre Opticien à Châtenay-Malabry</title>
 
-    <meta 
-      http-equiv="Content-Security-Policy" 
+    <meta
+      http-equiv="Content-Security-Policy"
       content="default-src 'self'; 
                script-src 'self' 'unsafe-inline' https://maps.googleapis.com; 
                style-src 'self' 'unsafe-inline'; 
@@ -15,12 +15,21 @@
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Optique Châtenay : experts en soins visuels à Châtenay-Malabry. Découvrez nos lunettes, examens de vue et conseils personnalisés." />
-    
+    <meta
+      name="description"
+      content="Optique Châtenay : experts en soins visuels à Châtenay-Malabry. Découvrez nos lunettes, examens de vue et conseils personnalisés."
+    />
+
     <link rel="canonical" href="https://www.optiquechatenay.fr/" />
 
-    <meta property="og:title" content="Optique Châtenay - Votre Opticien à Châtenay-Malabry" />
-    <meta property="og:description" content="Expertise visuelle et montures exclusives à Châtenay-Malabry." />
+    <meta
+      property="og:title"
+      content="Optique Châtenay - Votre Opticien à Châtenay-Malabry"
+    />
+    <meta
+      property="og:description"
+      content="Expertise visuelle et montures exclusives à Châtenay-Malabry."
+    />
     <meta property="og:url" content="https://www.optiquechatenay.fr/" />
     <meta property="og:type" content="website" />
 
@@ -31,35 +40,37 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "OpticalBusiness",
+        "@type": "Optician",
         "name": "Optique Châtenay",
         "image": "https://www.optiquechatenay.fr/assets/imageJolie.webp",
-        "@id": "https://www.optiquechatenay.fr",
         "url": "https://www.optiquechatenay.fr",
         "telephone": "+33146300359",
+        "priceRange": "€€",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Votre Adresse Rue",
+          "streetAddress": "640 Avenue de la Division Leclerc",
           "addressLocality": "Châtenay-Malabry",
           "postalCode": "92290",
           "addressCountry": "FR"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 48.765, 
-          "longitude": 2.278
+          "latitude": 48.76564,
+          "longitude": 2.27838
         },
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
             "opens": "10:00",
             "closes": "19:00"
           }
-        ],
-        "sameAs": [
-          "https://www.facebook.com/votrepage",
-          "https://www.instagram.com/votreprofil"
         ]
       }
     </script>
@@ -70,19 +81,29 @@
         font-style: normal;
         font-weight: 300;
         font-display: swap;
-        src: local("Roboto Light"), url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2") format("woff2");
+        src:
+          local("Roboto Light"),
+          url("/fonts/Roboto/roboto-condensed-v31-latin-regular.woff2")
+            format("woff2");
       }
       @font-face {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 700;
         font-display: swap;
-        src: local("Roboto Bold"), url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2") format("woff2");
+        src:
+          local("Roboto Bold"),
+          url("/fonts/Roboto/roboto-condensed-v31-latin-700.woff2")
+            format("woff2");
       }
-      body { margin: 0; font-family: "Roboto", sans-serif; background-color: #f0f0f0; }
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #f0f0f0;
+      }
     </style>
 
-    <script type="module" src="/src/main.tsx" fetchPriority="high"></script>
+    <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
   </head>
   <body>
     <div id="root"></div>

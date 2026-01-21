@@ -10,7 +10,7 @@ function NousTrouver() {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   const correctMapUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.816402271813!2d2.2612!3d48.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzAwLjAiTiAywrAxNSc0MC4zIkU!5e0!3m2!1sfr!2sfr!4v123456789";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.563456789!2d2.2645!3d48.7654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQ1JzU1LjQiTiAywrAxNSc1Mi4yIkU!5e0!3m2!1sfr!2sfr!4v1234567890";
 
   const currentUrl =
     typeof window !== "undefined" ? window.location.origin : "/";

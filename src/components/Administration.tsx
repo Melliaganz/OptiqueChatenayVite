@@ -70,7 +70,9 @@ function Administration() {
 
   const handleUpload = async (e: FormEvent) => {
     e.preventDefault();
-    if (!file) return;
+    // Bloque le double-clic : l'état "uploading" ne désactive le bouton
+    // qu'au re-rendu suivant
+    if (!file || uploading) return;
 
     setUploading(true);
     setProgress(0);

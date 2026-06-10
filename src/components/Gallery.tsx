@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { storage } from "../lib/firebase";
-import { getResizedUrl } from "../lib/firebaseImages";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "../styles/gallery.css";
 
 interface GalleryImage {
   url: string;
-  thumbUrl: string;
   alt: string;
   description: string;
   uploadDate: string;
@@ -41,7 +39,6 @@ const Gallery = () => {
             
             return {
               url,
-              thumbUrl: getResizedUrl(itemRef.fullPath, "400x300"),
               alt: metadata.name,
               description: metadata.customMetadata?.description || "",
               uploadDate: metadata.timeCreated,
@@ -111,7 +108,7 @@ const Gallery = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedImage, navigateImage]);
 
-  const imagesPerPage = 9;
+  const imagesPerPage = 12;
   const totalPages = Math.ceil(images.length / imagesPerPage);
   const startIndex = (currentPage - 1) * imagesPerPage;
   const currentImages = images.slice(startIndex, startIndex + imagesPerPage);
@@ -134,16 +131,11 @@ const Gallery = () => {
             {currentImages.map((image, index) => (
               <div key={`${image.url}-${index}`} className="image-container">
                 <img
-                  src={image.thumbUrl}
+                  src={image.url}
                   alt={image.alt}
                   className="image"
                   onClick={() => setSelectedImage(image)}
                   loading="lazy"
-                  onError={(e) => {
-                    // Pas de miniature générée pour cette image : repli sur l'originale
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = image.url;
-                  }}
                 />
               </div>
             ))}

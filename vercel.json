@@ -1,4 +1,5 @@
 {
+  "installCommand": "yarn install --immutable",
   "headers": [
     {
       "source": "/(.*)",

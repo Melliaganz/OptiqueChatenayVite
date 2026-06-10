@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import type { StorageReference } from "firebase/storage";
 import { storage } from "../lib/firebase";
+import { isResizedVariant } from "../lib/firebaseImages";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "../styles/gallery.css";
 
@@ -18,10 +19,6 @@ const Spinner = () => (
     <div className="loaderDeux" />
   </div>
 );
-
-// L'extension Firebase "Resize Images" génère des copies "nom_LxH.ext" :
-// on ne liste que les originales
-const isResizedVariant = (name: string) => /_\d+x\d+\.[^.]+$/.test(name);
 
 const Gallery = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
@@ -134,6 +131,17 @@ const Gallery = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedImage, navigateImage]);
 
+  // À l'ouverture du modal, focus sur le bouton Fermer ; à la fermeture,
+  // retour du focus sur l'élément déclencheur
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const isModalOpen = selectedImage !== null;
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const trigger = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    return () => trigger?.focus();
+  }, [isModalOpen]);
+
   const imagesPerPage = 12;
   const totalPages = Math.ceil(images.length / imagesPerPage);
   const startIndex = (currentPage - 1) * imagesPerPage;
@@ -186,9 +194,16 @@ const Gallery = () => {
 
       {selectedImage && (
         <div className="modal" onClick={() => setSelectedImage(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="close" 
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo agrandie"
+          >
+            <button
+              ref={closeButtonRef}
+              className="close"
               onClick={() => setSelectedImage(null)}
               aria-label="Fermer la galerie"
               title="Fermer"

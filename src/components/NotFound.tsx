@@ -1,19 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdHandyman, MdArrowBackIos } from "react-icons/md";
+import { MdHandyman } from "react-icons/md";
+import BackButton from "./BackButton";
+import { usePageTitle } from "../lib/usePageTitle";
 import "../styles/notfound.css";
 
 function NotFound() {
+  usePageTitle("Page introuvable");
+
   return (
     <section className="pageNotFoundSection">
-      <div className="bouttonRetour">
-        <Link to="/" title="Retour à l'accueil">
-          <span>
-            <MdArrowBackIos />
-          </span>
-          Retour
-        </Link>
-      </div>
+      <BackButton />
       <div className="pageNotFoundContainer">
         <div className="erreur404">
           <span className="settingIcon">

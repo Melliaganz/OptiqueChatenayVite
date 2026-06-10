@@ -35,14 +35,13 @@ const CarouselMarques = ({ children }: CarouselMarquesProps) => {
   );
 
   useEffect(() => {
+    if (paused) return;
     const interval = setInterval(() => {
-      if (!paused) {
-        updateIndex(activeIndex + 1);
-      }
+      setActiveIndex((i) => (i + 1) % itemCount);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [paused, activeIndex, updateIndex]);
+  }, [paused, itemCount]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),

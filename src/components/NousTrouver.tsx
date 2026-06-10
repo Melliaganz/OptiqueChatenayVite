@@ -40,19 +40,29 @@ function NousTrouver() {
             >
               <input type="hidden" name="_redirect" value={currentUrl} />
               <label>
-                <input placeholder="Nom" type="text" name="nom" required />
+                <input
+                  placeholder="Nom"
+                  aria-label="Nom"
+                  type="text"
+                  name="nom"
+                  required
+                  autoComplete="family-name"
+                />
               </label>
               <label>
                 <input
                   placeholder="Prénom"
+                  aria-label="Prénom"
                   type="text"
                   name="prénom"
                   required
+                  autoComplete="given-name"
                 />
               </label>
               <label>
                 <input
                   placeholder="Numéro de téléphone"
+                  aria-label="Numéro de téléphone"
                   type="tel"
                   name="tel"
                   required
@@ -60,11 +70,19 @@ function NousTrouver() {
                 />
               </label>
               <label>
-                <input placeholder="Email" type="email" name="email" required autoComplete="email" />
+                <input
+                  placeholder="Email"
+                  aria-label="Email"
+                  type="email"
+                  name="email"
+                  required
+                  autoComplete="email"
+                />
               </label>
               <label>
                 <textarea
                   placeholder="Que pouvons-nous faire pour vous ?"
+                  aria-label="Votre message"
                   name="message"
                   required
                 />

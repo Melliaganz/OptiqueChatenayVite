@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage } from "../lib/firebase";
 import { verifyPassword, uploadImage, deleteImage } from "../lib/adminApi";
+import { isResizedVariant } from "../lib/firebaseImages";
+import { usePageTitle } from "../lib/usePageTitle";
 import { MdVisibility, MdVisibilityOff, MdDelete, MdCloudUpload, MdArrowBack } from "react-icons/md";
 import "../styles/administration.css";
 
@@ -13,6 +15,7 @@ interface ExistingImage {
 }
 
 function Administration() {
+  usePageTitle("Administration");
   const navigate = useNavigate();
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -29,8 +32,7 @@ function Administration() {
     const imagesRef = ref(storage, "images");
     try {
       const res = await listAll(imagesRef);
-      // Exclut les copies "nom_LxH.ext" générées par l'extension Resize Images
-      const originals = res.items.filter((item) => !/_\d+x\d+\.[^.]+$/.test(item.name));
+      const originals = res.items.filter((item) => !isResizedVariant(item.name));
       const imageList = await Promise.all(
         originals.map(async (item) => ({
           name: item.name,

@@ -5,17 +5,11 @@ const ScrollTopButton = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        if (!isVisible) setIsVisible(true);
-      } else {
-        if (isVisible) setIsVisible(false);
-      }
-    };
+    const handleScroll = () => setIsVisible(window.scrollY > 300);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isVisible]);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -29,9 +23,10 @@ const ScrollTopButton = () => {
   return (
     <div className="scroll-top-wrapper">
       <button
+        type="button"
         onClick={scrollToTop}
         className="scroll-top-button"
-        aria-label="scroll back to top"
+        aria-label="Revenir en haut de page"
       >
         <svg
           stroke="currentColor"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "../styles/horaires.css";
 
 interface TimePoint {
@@ -10,14 +10,19 @@ interface Period {
   close: TimePoint;
 }
 
+// Miroir des horaires de la fiche Google (repli si l'API est injoignable)
 const DEFAULT_HOURS: Period[] = [
-  { open: { day: 1, time: "0000" }, close: { day: 1, time: "0000" } },
-  { open: { day: 2, time: "0930" }, close: { day: 2, time: "1930" } },
-  { open: { day: 3, time: "0930" }, close: { day: 3, time: "1930" } },
-  { open: { day: 4, time: "0930" }, close: { day: 4, time: "1930" } },
-  { open: { day: 5, time: "0930" }, close: { day: 5, time: "1930" } },
-  { open: { day: 6, time: "0930" }, close: { day: 6, time: "1900" } },
-  { open: { day: 0, time: "0000" }, close: { day: 0, time: "0000" } },
+  { open: { day: 1, time: "1430" }, close: { day: 1, time: "1900" } },
+  { open: { day: 2, time: "0930" }, close: { day: 2, time: "1300" } },
+  { open: { day: 2, time: "1430" }, close: { day: 2, time: "1900" } },
+  { open: { day: 3, time: "0930" }, close: { day: 3, time: "1300" } },
+  { open: { day: 3, time: "1430" }, close: { day: 3, time: "1900" } },
+  { open: { day: 4, time: "0930" }, close: { day: 4, time: "1300" } },
+  { open: { day: 4, time: "1430" }, close: { day: 4, time: "1900" } },
+  { open: { day: 5, time: "0930" }, close: { day: 5, time: "1300" } },
+  { open: { day: 5, time: "1430" }, close: { day: 5, time: "1900" } },
+  { open: { day: 6, time: "0930" }, close: { day: 6, time: "1300" } },
+  { open: { day: 6, time: "1430" }, close: { day: 6, time: "1800" } },
 ];
 
 const CACHE_KEY_HOURS = "optique_hours_cache";
@@ -180,6 +185,23 @@ const Horaires = () => {
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen);
 
+  // Popup : Échap pour fermer, focus sur Fermer à l'ouverture,
+  // retour du focus au déclencheur à la fermeture
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!isPopupOpen) return;
+    const trigger = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsPopupOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      trigger?.focus();
+    };
+  }, [isPopupOpen]);
+
   const getFormattedDaysList = (periods: Period[]) => {
     const daysOrder = [1, 2, 3, 4, 5, 6, 0];
     const periodsByDay = periods.reduce(
@@ -226,7 +248,12 @@ const Horaires = () => {
           Voir les horaires
         </button>
         {isPopupOpen && (
-          <div className="tableauHoraires">
+          <div
+            className="tableauHoraires"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Horaires du magasin"
+          >
             <div className="textHorairesPopup">
               <h2>Horaires du magasin</h2>
               <ul className="horaires-list">
@@ -243,6 +270,7 @@ const Horaires = () => {
               )}
             </div>
             <button
+              ref={closeButtonRef}
               className="bouttonMenuHoraires"
               onClick={togglePopup}
               type="button"

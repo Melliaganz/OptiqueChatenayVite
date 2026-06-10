@@ -1,20 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Gallery from "./Gallery.tsx";
-import { MdArrowBackIos } from "react-icons/md";
+import BackButton from "./BackButton";
+import { usePageTitle } from "../lib/usePageTitle";
 import "../styles/galleryPage.css";
 
 function GalleriePage() {
+  usePageTitle("Galerie de photos");
+
   return (
     <div>
-      <div className="bouttonRetour3">
-        <Link to="/" title="Retour à l'accueil">
-          <span>
-            <MdArrowBackIos />
-          </span>
-          Retour
-        </Link>
-      </div>
+      <BackButton className="bouttonRetour3" />
       <Gallery />
     </div>
   );

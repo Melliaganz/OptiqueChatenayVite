@@ -1,19 +1,14 @@
 import React from "react";
-import { MdArrowBackIos } from "react-icons/md";
-import { Link } from "react-router-dom";
+import BackButton from "./BackButton";
+import { usePageTitle } from "../lib/usePageTitle";
 import "../styles/mentions.css";
 
 function MentionLegales() {
+  usePageTitle("Mentions légales");
+
   return (
     <section className="MentionsSection">
-      <div className="bouttonRetour">
-        <Link to="/" title="Retour à l'accueil">
-          <span>
-            <MdArrowBackIos />
-          </span>
-          Retour
-        </Link>
-      </div>
+      <BackButton />
       <div className="MentionsLegalesTexte">
         <div className="titreMention">
           <h3>Mentions Légales</h3>

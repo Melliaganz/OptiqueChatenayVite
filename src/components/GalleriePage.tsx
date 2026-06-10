@@ -4,7 +4,7 @@ import Gallery from "./Gallery.tsx";
 import { MdArrowBackIos } from "react-icons/md";
 import "../styles/galleryPage.css";
 
-function GalleriedePhotos() {
+function GalleriePage() {
   return (
     <div>
       <div className="bouttonRetour3">
@@ -20,4 +20,4 @@ function GalleriedePhotos() {
   );
 }
 
-export default React.memo(GalleriedePhotos);
+export default React.memo(GalleriePage);

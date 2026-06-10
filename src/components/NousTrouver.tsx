@@ -35,6 +35,7 @@ function NousTrouver() {
             <form
               className="formulaireContact"
               action={formSparkUrl}
+              method="POST"
               onSubmit={() => setSubmitting(true)}
             >
               <input type="hidden" name="_redirect" value={currentUrl} />
@@ -59,7 +60,7 @@ function NousTrouver() {
                 />
               </label>
               <label>
-                <input placeholder="Email" type="email" name="email" required autoComplete="name" />
+                <input placeholder="Email" type="email" name="email" required autoComplete="email" />
               </label>
               <label>
                 <textarea

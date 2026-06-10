@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getResizedUrl } from "../lib/firebaseImages";
 import "../styles/bento.css";
 
 interface ImageConfig {
@@ -11,18 +12,6 @@ interface ImageConfig {
 }
 
 const GalleriePhotos: React.FC = () => {
-  const firebaseBucketUrl =
-    "https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/";
-
-  const getResizedUrl = (fullPath: string, size: string) => {
-    const dotIndex = fullPath.lastIndexOf(".");
-    const name = fullPath.substring(0, dotIndex);
-    const ext = fullPath.substring(dotIndex);
-    const resizedPath = `${name}_${size}${ext}`;
-    const encodedPath = encodeURIComponent(resizedPath);
-    return `${firebaseBucketUrl}${encodedPath}?alt=media`;
-  };
-
   const images: Record<string, ImageConfig> = {
     vitrine: {
       path: "ImagesHorizon/Vitrine.webp",

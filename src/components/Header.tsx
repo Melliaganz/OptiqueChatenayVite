@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import logoalthigh from "../img/logoaltHighlyCompressed.webp";
 import "../styles/header.css";
 
 function Header() {
   return (
     <header className="header">
-      <a
+      <Link
         className="logo"
-        href="/#accueil"
+        to="/#accueil"
         aria-label="Retour à l'accueil"
         rel="home"
       >
@@ -20,7 +21,7 @@ function Header() {
           decoding="sync"
           fetchPriority="high"
         />
-      </a>
+      </Link>
     </header>
   );
 }

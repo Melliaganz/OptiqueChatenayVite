@@ -9,13 +9,13 @@ function Accueil() {
     <section className="accueil" id="accueil">
       <img
         src="/assets/imageJolie.webp"
-        srcSet="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/imageJolie.webp"
+        srcSet="/assets/image_2026-01-03_020928644_xinep3_c_scale,w_804.webp 800w, /assets/imageJolie.webp 1400w"
         sizes="100vw"
         width="1400"
         height="800"
         alt="Jeune femme souriante portant des lunettes de soleil"
         className="accueil-lcp-image"
-        {...{ fetchpriority: "high" }}
+        fetchPriority="high"
       />
       <div className="accueilContainer">
         <div className="accueilBlocText">

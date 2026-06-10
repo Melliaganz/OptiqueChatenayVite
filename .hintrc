@@ -12,7 +12,9 @@
           "meta[name=theme-color]",
           "link[imagesrcset]",
           "link[imagesizes]",
-          "link[fetchpriority]"
+          "link[fetchpriority]",
+          "img[loading]",
+          "script[fetchpriority]"
         ]
       }
     ]

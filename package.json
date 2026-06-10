@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "packageManager": "yarn@4.14.1",
+  "packageManager": "yarn@4.16.0",
   "dependencies": {
     "firebase": "^12.7.0",
     "preact": "^10.28.2",
@@ -15,10 +15,12 @@
     "vite-plugin-css-injected-by-js": "^3.5.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@preact/preset-vite": "^2.10.5",
+    "@types/babel__core": "^7",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
     "rimraf": "^6.1.2",
     "sharp": "^0.34.5",
     "svgo": "^4.0.0",
@@ -29,7 +31,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node -e \"import fs from 'fs'; if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié'); }\"",
+    "build": "tsc -b && vite build && node -e \"import fs from 'fs'; if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié'); }\"",
     "preview": "vite preview",
     "clean": "rimraf node_modules dist .yarn/cache && yarn cache clean --all"
   },

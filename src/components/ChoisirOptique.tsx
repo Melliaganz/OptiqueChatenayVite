@@ -4,6 +4,7 @@ import {
   MdOutlineAccountBalanceWallet,
   MdOutlineVisibility,
 } from "react-icons/md";
+import { getResizedUrl } from "../lib/firebaseImages";
 import "../styles/choisirOptique.css";
 
 interface Feature {
@@ -53,18 +54,6 @@ const FEATURES: Feature[] = [
 ];
 
 const ChoisirOptique = () => {
-  const firebaseBucketUrl =
-    "https://firebasestorage.googleapis.com/v0/b/optiquechatenay-44520.appspot.com/o/";
-
-  const getResizedUrl = (fullPath: string, size: string) => {
-    const dotIndex = fullPath.lastIndexOf(".");
-    const name = fullPath.substring(0, dotIndex);
-    const ext = fullPath.substring(dotIndex);
-    const resizedPath = `${name}_${size}${ext}`;
-    const encodedPath = encodeURIComponent(resizedPath);
-    return `${firebaseBucketUrl}${encodedPath}?alt=media`;
-  };
-
   const imgLargePath = "ImagesHorizon/Interieur.webp";
   const imgNormPath = "ImagesHorizon/image_2026-01-04_000751218 (1) (1).webp";
 

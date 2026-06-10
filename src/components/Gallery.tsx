@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { storage } from "../lib/firebase";
+import { getResizedUrl } from "../lib/firebaseImages";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "../styles/gallery.css";
 
 interface GalleryImage {
   url: string;
+  thumbUrl: string;
   alt: string;
   description: string;
   uploadDate: string;
@@ -39,6 +41,7 @@ const Gallery = () => {
             
             return {
               url,
+              thumbUrl: getResizedUrl(itemRef.fullPath, "400x300"),
               alt: metadata.name,
               description: metadata.customMetadata?.description || "",
               uploadDate: metadata.timeCreated,
@@ -75,21 +78,38 @@ const Gallery = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigateImage = useCallback(
+    (delta: number) => {
+      setSelectedImage((current) => {
+        if (!current) return current;
+        const currentIndex = images.findIndex((img) => img.url === current.url);
+        return images[(currentIndex + delta + images.length) % images.length];
+      });
+    },
+    [images]
+  );
+
   const handlePrevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!selectedImage) return;
-    const currentIndex = images.findIndex((img) => img.url === selectedImage.url);
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    setSelectedImage(images[prevIndex]);
+    navigateImage(-1);
   };
 
   const handleNextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!selectedImage) return;
-    const currentIndex = images.findIndex((img) => img.url === selectedImage.url);
-    const nextIndex = (currentIndex + 1) % images.length;
-    setSelectedImage(images[nextIndex]);
+    navigateImage(1);
   };
+
+  // Navigation clavier du modal : Échap pour fermer, flèches pour naviguer
+  useEffect(() => {
+    if (!selectedImage) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedImage(null);
+      else if (e.key === "ArrowLeft") navigateImage(-1);
+      else if (e.key === "ArrowRight") navigateImage(1);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedImage, navigateImage]);
 
   const imagesPerPage = 9;
   const totalPages = Math.ceil(images.length / imagesPerPage);
@@ -114,11 +134,16 @@ const Gallery = () => {
             {currentImages.map((image, index) => (
               <div key={`${image.url}-${index}`} className="image-container">
                 <img
-                  src={image.url}
+                  src={image.thumbUrl}
                   alt={image.alt}
                   className="image"
                   onClick={() => setSelectedImage(image)}
                   loading="lazy"
+                  onError={(e) => {
+                    // Pas de miniature générée pour cette image : repli sur l'originale
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = image.url;
+                  }}
                 />
               </div>
             ))}

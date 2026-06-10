@@ -103,60 +103,80 @@ const Horaires = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cachedHours = localStorage.getItem(CACHE_KEY_HOURS);
-      const cachedHolidays = localStorage.getItem(CACHE_KEY_HOLIDAYS);
-      const cachedTime = localStorage.getItem(CACHE_KEY_TIME);
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-      if (cachedHours && cachedHolidays) {
-        setApiStoreHours(JSON.parse(cachedHours));
-        setHolidays(JSON.parse(cachedHolidays));
-        if (cachedTime && Date.now() - parseInt(cachedTime) < ONE_DAY) {
-          setIsLoading(false);
-          return;
-        }
-      }
-
-      const runFetch = async () => {
-        try {
-          const year = new Date().getFullYear();
-          const [holidayRes, googleRes] = await Promise.all([
-            fetch(`https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`),
-            fetch("/api/get-google-hours"),
-          ]);
-
-          if (holidayRes.ok) {
-            const holidayData = await holidayRes.json();
-            const freshHolidays = Object.keys(holidayData);
-            setHolidays(freshHolidays);
-            localStorage.setItem(CACHE_KEY_HOLIDAYS, JSON.stringify(freshHolidays));
-          }
-
-          if (googleRes.ok) {
-            const data = await googleRes.json();
-            if (data.status === "OK" && data.result?.opening_hours?.periods) {
-              const freshPeriods = data.result.opening_hours.periods;
-              setApiStoreHours(freshPeriods);
-              localStorage.setItem(CACHE_KEY_HOURS, JSON.stringify(freshPeriods));
-            }
-          }
-          localStorage.setItem(CACHE_KEY_TIME, Date.now().toString());
-        } catch (error) {
-          if (apiStoreHours.length === 0) setApiStoreHours(DEFAULT_HOURS);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      if (document.readyState === 'complete') {
-        setTimeout(runFetch, 2500);
-      } else {
-        window.addEventListener('load', () => setTimeout(runFetch, 2500));
+    const readCache = <T,>(key: string): T | null => {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? (JSON.parse(raw) as T) : null;
+      } catch {
+        localStorage.removeItem(key);
+        return null;
       }
     };
 
-    fetchData();
-  }, [apiStoreHours.length]);
+    const cachedHours = readCache<Period[]>(CACHE_KEY_HOURS);
+    const cachedHolidays = readCache<string[]>(CACHE_KEY_HOLIDAYS);
+    const cachedTime = localStorage.getItem(CACHE_KEY_TIME);
+    const hasCachedHours = !!cachedHours && cachedHours.length > 0;
+
+    if (cachedHours && cachedHolidays) {
+      setApiStoreHours(cachedHours);
+      setHolidays(cachedHolidays);
+      if (cachedTime && Date.now() - parseInt(cachedTime) < ONE_DAY) {
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    const runFetch = async () => {
+      try {
+        const year = new Date().getFullYear();
+        const [holidayRes, googleRes] = await Promise.all([
+          fetch(`https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`),
+          fetch("/api/get-google-hours"),
+        ]);
+
+        if (holidayRes.ok) {
+          const holidayData = await holidayRes.json();
+          const freshHolidays = Object.keys(holidayData);
+          if (!cancelled) setHolidays(freshHolidays);
+          localStorage.setItem(CACHE_KEY_HOLIDAYS, JSON.stringify(freshHolidays));
+        }
+
+        if (googleRes.ok) {
+          const data = await googleRes.json();
+          if (data.status === "OK" && data.result?.opening_hours?.periods) {
+            const freshPeriods = data.result.opening_hours.periods;
+            if (!cancelled) setApiStoreHours(freshPeriods);
+            localStorage.setItem(CACHE_KEY_HOURS, JSON.stringify(freshPeriods));
+          }
+        }
+        localStorage.setItem(CACHE_KEY_TIME, Date.now().toString());
+      } catch (error) {
+        if (!cancelled && !hasCachedHours) setApiStoreHours(DEFAULT_HOURS);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    };
+
+    const scheduleFetch = () => {
+      timeoutId = setTimeout(runFetch, 2500);
+    };
+
+    if (document.readyState === "complete") {
+      scheduleFetch();
+    } else {
+      window.addEventListener("load", scheduleFetch, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+      window.removeEventListener("load", scheduleFetch);
+    };
+  }, []);
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen);
 

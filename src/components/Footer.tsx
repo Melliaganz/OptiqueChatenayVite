@@ -13,8 +13,8 @@ function Footer() {
     <section className='footerSection'>
         <div className='headerFooter'>
           <div className='imageHeaderFooter'>
-            <Link 
-              to={isHomePage ? "#accueil" : "/"} 
+            <Link
+              to="/#accueil"
               aria-label="Retour à l'accueil"
             >
               <img 
@@ -28,7 +28,7 @@ function Footer() {
           </div>
 
           <div className='headerFooterh3'>
-            <h1>Optique Chatenay</h1>
+            <p className='footerSiteName'>Optique Chatenay</p>
           </div>
 
           <div className='logoReseaux'>
@@ -56,7 +56,7 @@ function Footer() {
               {isHomePage ? (
                 <a href="#accueil">Accueil</a>
               ) : (
-                <Link to="/">Accueil</Link>
+                <Link to="/#accueil">Accueil</Link>
               )}
             </li>
             <li className='elementListe1'>

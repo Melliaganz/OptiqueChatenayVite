@@ -4,16 +4,6 @@
     <meta charset="utf-8" />
     <title>Optique Châtenay - Votre Opticien à Châtenay-Malabry</title>
 
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; 
-               script-src 'self' 'unsafe-inline' https://maps.googleapis.com; 
-               style-src 'self' 'unsafe-inline'; 
-               img-src 'self' data: https://firebasestorage.googleapis.com https://maps.gstatic.com https://*.googleapis.com; 
-               connect-src 'self' data: https://*.googleapis.com https://*.firebaseio.com https://calendrier.api.gouv.fr; 
-               frame-src 'self' https://www.google.com https://googleusercontent.com;"
-    />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -48,27 +38,27 @@
         "priceRange": "€€",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "640 Avenue de la Division Leclerc",
+          "streetAddress": "432 Avenue de la Division Leclerc",
           "addressLocality": "Châtenay-Malabry",
           "postalCode": "92290",
           "addressCountry": "FR"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 48.76564,
-          "longitude": 2.27838
+          "latitude": 48.75091,
+          "longitude": 2.26127
         },
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "opens": "10:00",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:30",
+            "closes": "19:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:30",
             "closes": "19:00"
           }
         ]

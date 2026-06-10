@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ref, uploadBytesResumable, listAll, getDownloadURL, deleteObject } from "firebase/storage";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage } from "../lib/firebase";
+import { verifyPassword, uploadImage, deleteImage } from "../lib/adminApi";
 import { MdVisibility, MdVisibilityOff, MdDelete, MdCloudUpload, MdArrowBack } from "react-icons/md";
 import "../styles/administration.css";
 
@@ -46,12 +47,16 @@ function Administration() {
     }
   }, [isLoggedIn, fetchImages]);
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
-      setIsLoggedIn(true);
-    } else {
-      alert("Mot de passe incorrect");
+    try {
+      if (await verifyPassword(password)) {
+        setIsLoggedIn(true);
+      } else {
+        alert("Mot de passe incorrect");
+      }
+    } catch {
+      alert("Erreur réseau, réessayez");
     }
   };
 
@@ -63,52 +68,42 @@ function Administration() {
     }
   };
 
-  const handleUpload = (e: FormEvent) => {
+  const handleUpload = async (e: FormEvent) => {
     e.preventDefault();
     if (!file) return;
 
     setUploading(true);
     setProgress(0);
-    const storageRef = ref(storage, `images/${file.name}`);
-    
-    const metadata = {
-      customMetadata: {
-        description: description,
-      },
-    };
-
-    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const p = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(Math.round(p));
-      },
-      (error) => {
-        console.error("Erreur upload:", error);
+    try {
+      const ok = await uploadImage(file, description, password, setProgress);
+      if (!ok) {
         alert("Erreur lors de l'envoi");
-        setUploading(false);
-      },
-      () => {
-        alert("Image uploadée avec succès !");
-        setFile(null);
-        setPreviewUrl(null);
-        setDescription("");
-        setUploading(false);
-        setProgress(0);
-        const fileInput = document.getElementById("fileInput") as HTMLInputElement;
-        if (fileInput) fileInput.value = "";
-        fetchImages();
+        return;
       }
-    );
+      alert("Image uploadée avec succès !");
+      setFile(null);
+      setPreviewUrl(null);
+      setDescription("");
+      const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+      if (fileInput) fileInput.value = "";
+      fetchImages();
+    } catch (error) {
+      console.error("Erreur upload:", error);
+      alert("Erreur lors de l'envoi");
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
   };
 
   const handleDelete = async (fileName: string) => {
     if (window.confirm(`Supprimer l'image ${fileName} ?`)) {
-      const imageRef = ref(storage, `images/${fileName}`);
       try {
-        await deleteObject(imageRef);
+        const ok = await deleteImage(fileName, password);
+        if (!ok) {
+          alert("Erreur lors de la suppression");
+          return;
+        }
         setExistingImages(existingImages.filter(img => img.name !== fileName));
       } catch (error) {
         console.error("Erreur suppression:", error);
@@ -142,7 +137,7 @@ function Administration() {
             </div>
             <button type="submit" className="bouttonValider">Valider</button>
           </form>
-          <button onClick={() => navigate("/")} className="cancelButton">
+          <button type="button" onClick={() => navigate("/")} className="cancelButton">
            <MdArrowBack /> Retour au site
           </button>
         </div>
@@ -154,21 +149,23 @@ function Administration() {
     <div className="adminBlock">
       <div className="blockMotDePasseContainer">
         <div className="dashboard-header">
-          <button onClick={() => navigate("/")} className="back-to-site" title="Retour au site">
+          <button type="button" onClick={() => navigate("/")} className="back-to-site" title="Retour au site">
              Retour vers l'accueil
           </button>
           <h1>Dashboard Admin</h1>
         </div>
         
         <div className="adminTabs">
-          <button 
-            className={`tabButton ${!showManager ? "active" : ""}`} 
+          <button
+            type="button"
+            className={`tabButton ${!showManager ? "active" : ""}`}
             onClick={() => setShowManager(false)}
           >
             Ajouter
           </button>
-          <button 
-            className={`tabButton ${showManager ? "active" : ""}`} 
+          <button
+            type="button"
+            className={`tabButton ${showManager ? "active" : ""}`}
             onClick={() => setShowManager(true)}
           >
             Gérer ({existingImages.length})
@@ -188,7 +185,6 @@ function Administration() {
                 onChange={handleFileChange}
                 accept="image/*"
                 required
-                style={{ display: 'none' }}
               />
               
               {previewUrl && (
@@ -205,7 +201,7 @@ function Administration() {
 
               {uploading && (
                 <div className="progress-container">
-                  <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                  <progress value={progress} max={100} />
                   <span>{progress}%</span>
                 </div>
               )}
@@ -227,8 +223,9 @@ function Administration() {
                 <div key={img.name} className="manager-item">
                   <img src={img.url} alt={img.name} />
                   <span className="file-name">{img.name}</span>
-                  <button 
-                    onClick={() => handleDelete(img.name)} 
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(img.name)}
                     className="delete-btn"
                     title="Supprimer l'image"
                   >
@@ -240,7 +237,7 @@ function Administration() {
           </div>
         )}
 
-        <button onClick={() => setIsLoggedIn(false)} className="cancelButton">
+        <button type="button" onClick={() => setIsLoggedIn(false)} className="cancelButton">
           Déconnexion
         </button>
       </div>

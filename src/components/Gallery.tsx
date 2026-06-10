@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import type { StorageReference } from "firebase/storage";
 import { storage } from "../lib/firebase";
 import { MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "../styles/gallery.css";
 
 interface GalleryImage {
   url: string;
+  thumbUrl: string;
   alt: string;
   description: string;
   uploadDate: string;
@@ -16,6 +18,10 @@ const Spinner = () => (
     <div className="loaderDeux" />
   </div>
 );
+
+// L'extension Firebase "Resize Images" génère des copies "nom_LxH.ext" :
+// on ne liste que les originales
+const isResizedVariant = (name: string) => /_\d+x\d+\.[^.]+$/.test(name);
 
 const Gallery = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
@@ -30,15 +36,35 @@ const Gallery = () => {
 
     listAll(imagesRef)
       .then(async (res) => {
-        const imagePromises = res.items.map(async (itemRef) => {
+        // Regroupe les variantes par image d'origine ("nom" -> [nom_400x300, ...])
+        const variantsByStem = new Map<string, { ref: StorageReference; width: number }[]>();
+        for (const item of res.items) {
+          const m = item.name.match(/^(.+)_(\d+)x\d+\.[^.]+$/);
+          if (!m) continue;
+          const list = variantsByStem.get(m[1]) ?? [];
+          list.push({ ref: item, width: parseInt(m[2]) });
+          variantsByStem.set(m[1], list);
+        }
+
+        const originals = res.items.filter((item) => !isResizedVariant(item.name));
+        const imagePromises = originals.map(async (itemRef) => {
           try {
-            const [url, metadata] = await Promise.all([
+            // Vignette : la variante la plus proche de 400px de large ;
+            // à défaut (anciennes images sans variantes), l'originale
+            const stem = itemRef.name.replace(/\.[^.]+$/, "");
+            const thumb = (variantsByStem.get(stem) ?? []).sort(
+              (a, b) => Math.abs(a.width - 400) - Math.abs(b.width - 400)
+            )[0];
+
+            const [url, thumbUrl, metadata] = await Promise.all([
               getDownloadURL(itemRef),
-              getMetadata(itemRef)
+              thumb ? getDownloadURL(thumb.ref) : null,
+              getMetadata(itemRef),
             ]);
-            
+
             return {
               url,
+              thumbUrl: thumbUrl ?? url,
               alt: metadata.name,
               description: metadata.customMetadata?.description || "",
               uploadDate: metadata.timeCreated,
@@ -131,7 +157,7 @@ const Gallery = () => {
             {currentImages.map((image, index) => (
               <div key={`${image.url}-${index}`} className="image-container">
                 <img
-                  src={image.url}
+                  src={image.thumbUrl}
                   alt={image.alt}
                   className="image"
                   onClick={() => setSelectedImage(image)}

@@ -29,8 +29,10 @@ function Administration() {
     const imagesRef = ref(storage, "images");
     try {
       const res = await listAll(imagesRef);
+      // Exclut les copies "nom_LxH.ext" générées par l'extension Resize Images
+      const originals = res.items.filter((item) => !/_\d+x\d+\.[^.]+$/.test(item.name));
       const imageList = await Promise.all(
-        res.items.map(async (item) => ({
+        originals.map(async (item) => ({
           name: item.name,
           url: await getDownloadURL(item),
         }))

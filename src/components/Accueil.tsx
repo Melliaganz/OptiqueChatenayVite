@@ -2,9 +2,14 @@ import React from "react";
 import Horaires from "./Horaires";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { FaPhoneFlip } from "react-icons/fa6";
+import { useMediaQuery } from "../lib/useMediaQuery";
 import "../styles/accueil.css";
 
 function Accueil() {
+  // Sous 768px le bloc horaires du héro est masqué en CSS : on ne le monte
+  // pas du tout pour éviter un double fetch avec celui de la section contact
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <section className="accueil" id="accueil">
       <img
@@ -62,9 +67,11 @@ function Accueil() {
             </div>
           </div>
         </div>
-        <div className="PositionBlocHoraire">
-          <Horaires />
-        </div>
+        {!isMobile && (
+          <div className="PositionBlocHoraire">
+            <Horaires />
+          </div>
+        )}
       </div>
     </section>
   );

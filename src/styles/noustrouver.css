@@ -94,6 +94,29 @@
   color: var(--pink);
   display: flex;
 }
+/* Carte horaires (mobile/tablette) : reprend le style des cartes contact,
+   le widget Horaires est conçu pour le fond sombre du héro d'où les overrides */
+.horairesInfos {
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.horairesInfos .interieurInfosContact {
+  flex: 1;
+}
+.horairesInfos .blocHoraires {
+  margin-top: 0;
+}
+.horairesInfos .encadréOuvertFermé {
+  padding: 0;
+  min-height: 0;
+}
+.horairesInfos .blocTextHeures p {
+  color: var(--black);
+  font-weight: 400;
+}
+.horairesInfos .blocTextHeures strong {
+  color: #1e8a4c;
+}
 .mapWrapper {
   position: relative;
   display: flex;

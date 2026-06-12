@@ -126,7 +126,10 @@
 @media screen and (max-width: 576px) {
   .accueilBlocText {
     width: 100vw;
-    height: 100%;
+    /* height: 100% ne couvre pas l'image : .accueilContainer n'a pas de
+       hauteur définie. min-height cale le bloc sur le héro complet */
+    height: auto;
+    min-height: 100vh;
     padding: 50px;
     text-align: center;
   }
@@ -147,9 +150,16 @@
     display: none;
   }
 }
-@media screen and (min-width: 576px) and (max-width: 768px) {
+/* 767.98 et non 768 : évite le chevauchement avec la règle tablette 768-1100 */
+@media screen and (min-width: 576px) and (max-width: 767.98px) {
   .accueilBlocText {
     width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    text-align: center;
+  }
+  .adressesEtTelBloc {
+    align-items: center;
   }
   .titreEtTextetBoutton {
     display: flex;
@@ -162,17 +172,27 @@
     display: none;
   }
 }
-/* Tablette : la colonne desktop (35vw, h1 6rem) est trop étroite à ces tailles */
+/* Tablette : l'encadré couvre toute l'image, comme sur smartphone */
 @media screen and (min-width: 768px) and (max-width: 1100px) {
   .accueilBlocText {
-    width: 50vw;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
     padding: 2rem;
+    text-align: center;
   }
   .accueilBlocText h1 {
     font-size: 3.5rem;
   }
+  .titreEtTextetBoutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
   .adressesEtTelBloc {
     font-size: 1.1rem;
+    align-items: center;
   }
   .PositionBlocHoraire {
     right: 40px;

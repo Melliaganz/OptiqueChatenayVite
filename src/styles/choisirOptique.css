@@ -1,14 +1,17 @@
+/* Même gabarit que les sections bento et contact : padding 80px 20px sur la
+   section, conteneur centré à 1200px max */
 .choisirOptiqueChatenaySection {
   width: 100%;
   overflow: hidden;
   background: var(--white);
+  padding: 80px 20px;
 }
 .choisirOptiqueContainer {
   display: flex;
   align-items: center;
   gap: 20px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
 }
 .textChoisirOptique {
   min-width: 0;

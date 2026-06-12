@@ -3,41 +3,88 @@
   background-color: var(--white);
   overflow: hidden;
 }
-.carousel-marques-group {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  align-items: center;
-  justify-items: center;
-  padding: 20px;
+/* Fondu sur les bords : les logos apparaissent et disparaissent en douceur */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
 }
-.nosMarquesContainer a {
+/* La liste est présente deux fois dans le track : -50% ramène exactement
+   au point de départ, la boucle est invisible */
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: defileMarques 45s linear infinite;
+}
+.marquee:hover .marqueeTrack,
+.marquee:focus-within .marqueeTrack,
+.marquee.estEnPause .marqueeTrack {
+  animation-play-state: paused;
+}
+@keyframes defileMarques {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marqueeListe {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  list-style: none;
+  margin: 0;
+  /* Le padding horizontal (24px de chaque côté) reproduit le gap de 48px
+     à la jonction entre les deux copies de la liste */
+  padding: 20px 24px;
+}
+.marqueeListe a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 150px;
+  width: 150px;
   height: 80px;
   filter: grayscale(100%);
   opacity: 0.6;
-  transition: all 0.4s ease;
+  transition:
+    filter 0.4s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
-.nosMarquesContainer a:hover {
+.marqueeListe a:hover,
+.marqueeListe a:focus-visible {
   filter: grayscale(0%);
   opacity: 1;
   transform: scale(1.1);
 }
-.nosMarquesContainer img {
+.marqueeListe img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
 @media screen and (max-width: 768px) {
-  .carousel-marques-group {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .marqueeListe {
+    gap: 24px;
+    padding: 15px 12px;
   }
-  .nosMarquesContainer a {
+  .marqueeListe a {
+    width: 120px;
     height: 60px;
+  }
+}
+/* Pas d'animation : bandeau figé, défilement manuel, copie inutile masquée */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+  }
+  .marquee {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .marqueeListe[aria-hidden] {
+    display: none;
   }
 }

@@ -153,16 +153,65 @@
   display: block;
 }
 .mapPlaceholder {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+.mapPlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mapActions {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
   justify-content: center;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100% - 24px);
+}
+.mapBoutonInteractif,
+.mapBoutonItineraire {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 0.25);
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.mapBoutonInteractif:hover,
+.mapBoutonItineraire:hover {
+  transform: scale(1.05);
+}
+.mapBoutonInteractif {
+  background: var(--white);
   color: var(--black);
+}
+.mapBoutonItineraire {
+  background: var(--pink);
+  color: var(--black);
+}
+/* Mention obligatoire (licence ODbL des données OpenStreetMap) */
+.mapAttribution {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  font-size: 0.7rem;
+  color: rgb(0 0 0 / 0.65);
+  background: rgb(255 255 255 / 0.75);
+  padding: 1px 5px;
+  border-radius: 3px;
 }
 @media screen and (max-width: 992px) {
   .nousTrouverContainer {

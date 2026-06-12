@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { IoMailOutline } from "react-icons/io5";
-import { MdLocalPhone, MdAccessTime } from "react-icons/md";
+import { MdLocalPhone, MdAccessTime, MdDirections, MdMap } from "react-icons/md";
 import Horaires from "./Horaires";
 import { useMediaQuery } from "../lib/useMediaQuery";
+import carteOsm from "../img/carteOsm.webp";
 import "../styles/noustrouver.css";
-import { LuMapPin } from "react-icons/lu";
 
 function NousTrouver() {
   const formSparkUrl = "https://submit-form.com/VNw27FMx";
@@ -15,6 +15,10 @@ function NousTrouver() {
 
   const correctMapUrl =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.620353457193!2d2.261266276856034!3d48.75091480826975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e677053075677b%3A0x6b49910e5494d48a!2s432%20Av.%20de%20la%20Div.%20Leclerc%2C%2092290%20Ch%C3%A2tenay-Malabry!5e0!3m2!1sfr!2sfr!4v1704500000000!5m2!1sfr!2sfr";
+
+  // Ouvre l'app GPS du visiteur (Google Maps, Plans, Waze...) en mode itinéraire
+  const itineraireUrl =
+    "https://www.google.com/maps/dir/?api=1&destination=Optique+Chatenay%2C+432+Avenue+de+la+Division+Leclerc%2C+92290+Ch%C3%A2tenay-Malabry";
 
   const currentUrl =
     typeof window !== "undefined" ? window.location.origin : "/";
@@ -166,10 +170,33 @@ function NousTrouver() {
               />
             ) : (
               <div className="mapPlaceholder">
-                <span>
-                  <LuMapPin size={32}/>
-                </span>
-                <p>Cliquez ici pour charger la carte</p>
+                {/* Aperçu local (scripts/genere-carte-osm.mjs) : la carte est
+                    visible sans clic et sans requête Google */}
+                <img
+                  src={carteOsm}
+                  alt="Plan du quartier : le magasin au 432 avenue de la Division Leclerc à Châtenay-Malabry"
+                  width="1024"
+                  height="768"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="mapActions">
+                  <button type="button" className="mapBoutonInteractif">
+                    <MdMap size={20} />
+                    Carte interactive
+                  </button>
+                  <a
+                    className="mapBoutonItineraire"
+                    href={itineraireUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <MdDirections size={20} />
+                    Itinéraire
+                  </a>
+                </div>
+                <span className="mapAttribution">© OpenStreetMap</span>
               </div>
             )}
           </div>

@@ -5,6 +5,7 @@
   "type": "module",
   "packageManager": "yarn@4.16.0",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "preact": "^10.29.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

@@ -13,6 +13,11 @@ export function checkPassword(req) {
   return crypto.timingSafeEqual(a, b);
 }
 
+// Freine le brute-force : chaque tentative ratée coûte au moins une seconde
+export function bruteForceDelay() {
+  return new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
 let cachedToken = null;
 
 // Jeton d'accès OAuth2 obtenu en signant un JWT avec la clé de service

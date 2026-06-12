@@ -59,11 +59,12 @@ const Gallery = () => {
               getMetadata(itemRef),
             ]);
 
+            const description = metadata.customMetadata?.description || "";
             return {
               url,
               thumbUrl: thumbUrl ?? url,
-              alt: metadata.name,
-              description: metadata.customMetadata?.description || "",
+              alt: description || metadata.name,
+              description,
               uploadDate: metadata.timeCreated,
             };
           } catch (err) {
@@ -157,7 +158,10 @@ const Gallery = () => {
         <Spinner />
       ) : error ? (
         <div className="error-message">
-          <p>Erreur: {error.message}</p>
+          <p>
+            Impossible de charger la galerie pour le moment. Veuillez réessayer
+            plus tard.
+          </p>
         </div>
       ) : (
         <>

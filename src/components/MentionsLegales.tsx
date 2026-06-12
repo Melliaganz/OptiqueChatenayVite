@@ -11,7 +11,7 @@ function MentionLegales() {
       <BackButton />
       <div className="MentionsLegalesTexte">
         <div className="titreMention">
-          <h3>Mentions Légales</h3>
+          <h1>Mentions Légales</h1>
         </div>
         <div className="contenuMentionsLegales">
           <div className="titreEtTexteMentions">

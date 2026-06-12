@@ -36,12 +36,14 @@ const CarouselMarques = ({ children }: CarouselMarquesProps) => {
 
   useEffect(() => {
     if (paused) return;
+    // activeIndex en dépendance : une navigation manuelle réarme le timer,
+    // l'autoplay n'avance pas juste après un clic ou un swipe
     const interval = setInterval(() => {
       setActiveIndex((i) => (i + 1) % itemCount);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [paused, itemCount]);
+  }, [paused, itemCount, activeIndex]);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),

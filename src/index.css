@@ -8,6 +8,8 @@
   --pink: #ff69b4;
   --blue: #d6edff;
   --pinkContrast: #c93580;
+  /* Texte du widget horaires sur le fond sombre du héro */
+  --vert: #bdf2ab;
   background-color: var(--grey);
   font-synthesis: none;
   text-rendering: optimizeLegibility;

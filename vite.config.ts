@@ -21,12 +21,5 @@ export default defineConfig({
     modulePreload: {
       polyfill: false,
     },
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('firebase')) return 'v-fb';
-        },
-      },
-    },
   },
 });

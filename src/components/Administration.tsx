@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { storage } from "../lib/firebase";
 import { verifyPassword, uploadImage, deleteImage } from "../lib/adminApi";
-import { isResizedVariant } from "../lib/firebaseImages";
+import { isResizedVariant, listFiles, getFileUrl } from "../lib/firebaseImages";
 import { usePageTitle } from "../lib/usePageTitle";
 import { MdVisibility, MdVisibilityOff, MdDelete, MdCloudUpload, MdArrowBack } from "react-icons/md";
 import "../styles/administration.css";
@@ -29,16 +27,13 @@ function Administration() {
   const [showManager, setShowManager] = useState<boolean>(false);
 
   const fetchImages = useCallback(async () => {
-    const imagesRef = ref(storage, "images");
     try {
-      const res = await listAll(imagesRef);
-      const originals = res.items.filter((item) => !isResizedVariant(item.name));
-      const imageList = await Promise.all(
-        originals.map(async (item) => ({
-          name: item.name,
-          url: await getDownloadURL(item),
-        }))
-      );
+      // Bucket public : un seul appel réseau, les URLs se construisent localement
+      const paths = await listFiles("images/");
+      const imageList = paths
+        .map((p) => p.replace(/^images\//, ""))
+        .filter((name) => !isResizedVariant(name))
+        .map((name) => ({ name, url: getFileUrl(`images/${name}`) }));
       setExistingImages(imageList);
     } catch (error) {
       console.error("Erreur récupération:", error);

@@ -5,34 +5,31 @@
   "type": "module",
   "packageManager": "yarn@4.16.0",
   "dependencies": {
-    "firebase": "^12.14.0",
     "preact": "^10.29.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-icons": "^5.6.0",
-    "react-router-dom": "^7.17.0",
-    "vite-plugin-css-injected-by-js": "^5.0.1"
+    "react-router-dom": "^7.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@preact/preset-vite": "^2.10.5",
-    "@types/babel__core": "^7.20.5",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "rimraf": "^6.1.3",
     "sharp": "^0.35.1",
     "svgo": "^4.0.1",
     "terser": "^5.48.0",
     "typescript": "6.0.3",
     "vite": "^8.0.16",
+    "vite-plugin-css-injected-by-js": "^5.0.1",
     "vite-plugin-image-optimizer": "^2.0.3"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && node -e \"import fs from 'fs'; if (fs.existsSync('serve.json')) { if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('serve.json', 'dist/serve.json'); console.log('serve.json copié'); }\"",
     "preview": "vite preview",
-    "clean": "rimraf node_modules dist .yarn/cache && yarn cache clean --all"
+    "clean": "node -e \"import fs from 'fs'; ['node_modules', 'dist', '.yarn/cache'].forEach((p) => fs.rmSync(p, { recursive: true, force: true }))\" && yarn cache clean --all"
   },
   "browserslist": {
     "production": [
